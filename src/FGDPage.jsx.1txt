@@ -1,0 +1,173 @@
+// /src/FGDPage.jsx (Anda bisa menggunakan ini sebagai App.jsx untuk tes)
+import React from "react";
+import MemberCard from "./components/MemberCard";
+import { lecturer, members } from "./data/fgdMembers";
+
+const FGDPage = () => {
+  return (
+    <div
+      style={{
+        fontFamily: "Arial, sans-serif",
+        padding: "20px",
+        backgroundColor: "#f9f9f9",
+      }}
+    >
+      {/* SECTION 1: HEADER & JUDUL FGD */}
+      <header
+        style={{
+          textAlign: "center",
+          padding: "30px 0",
+          backgroundColor: "#007bff",
+          color: "white",
+          marginBottom: "30px",
+        }}
+      >
+        <h3 style={{ margin: 0 }}>FOCUS GROUP DISCUSSION (FGD)</h3>
+        <h1 style={{ margin: "5px 0 10px 0" }}>Rukun di Era Disrupsi</h1>
+        <p style={{ fontSize: "18px" }}>
+          Mewujudkan Kerukunan Umat Beragama dalam Multi Konteks Kehidupan
+        </p>
+
+        {/* Call to Action Utama */}
+        <a
+          href="#registration"
+          style={{
+            display: "inline-block",
+            marginTop: "15px",
+            padding: "10px 20px",
+            backgroundColor: "#28a745",
+            color: "white",
+            textDecoration: "none",
+            borderRadius: "5px",
+          }}
+        >
+          DAFTAR SEKARANG & JADI BAGIAN DARI SOLUSI!
+        </a>
+      </header>
+
+      {/* SECTION 2: DETAIL LOGISTIK */}
+      <section
+        style={{
+          maxWidth: "800px",
+          margin: "auto",
+          marginBottom: "40px",
+          padding: "20px",
+          backgroundColor: "white",
+          borderRadius: "8px",
+          boxShadow: "0 0 10px rgba(0,0,0,0.1)",
+        }}
+      >
+        <h2 style={{ textAlign: "center", color: "#007bff" }}>DETAIL ACARA</h2>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-around",
+            textAlign: "center",
+            marginTop: "20px",
+          }}
+        >
+          <div>
+            <h3>🗓️ Waktu</h3>
+            <p>Jumat, 22 November 2025</p>
+          </div>
+          <div>
+            <h3>⏰ Pukul</h3>
+            <p>14.00 - 16.00 WIB</p>
+          </div>
+          <div>
+            <h3>📍 Tempat</h3>
+            <p>Ruang Rapat Digital, Gedung F | Kampus [Nama Kampus]</p>
+          </div>
+        </div>
+        <div style={{ marginTop: "20px", textAlign: "center" }}>
+          <h3>Manfaat</h3>
+          <p>E-Sertifikat, Wawasan Eksklusif, Networking Lintas Bidang.</p>
+        </div>
+      </section>
+
+      {/* SECTION 3: TEAM & INTERACTIVE PROFILES */}
+      <section
+        style={{ maxWidth: "1200px", margin: "auto", marginBottom: "40px" }}
+      >
+        <h2
+          style={{
+            textAlign: "center",
+            color: "#007bff",
+            borderBottom: "2px solid #007bff",
+            paddingBottom: "10px",
+          }}
+        >
+          TIM PENELITI & FASILITATOR
+        </h2>
+
+        {/* Dosen Pembimbing */}
+        <div style={{ textAlign: "center", margin: "30px 0" }}>
+          <h3 style={{ color: "#dc3545" }}>Dosen Pembimbing</h3>
+          <div
+            style={{
+              display: "inline-block",
+              padding: "15px",
+              border: "2px solid #dc3545",
+              borderRadius: "10px",
+              backgroundColor: "#ffe5e5",
+            }}
+          >
+            <img
+              src={lecturer.imagePlaceholder}
+              alt={lecturer.name}
+              style={{ borderRadius: "50%", width: "100px", height: "100px" }}
+            />
+            <h4 style={{ margin: "10px 0 5px 0" }}>{lecturer.name}</h4>
+            <p>{lecturer.bio}</p>
+          </div>
+        </div>
+
+        {/* Anggota Tim (15 Orang) */}
+        <h3 style={{ textAlign: "center", marginTop: "40px" }}>
+          Anggota Kelompok Riset (15 Orang)
+        </h3>
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+          }}
+        >
+          {members.map((member) => (
+            <MemberCard key={member.id} member={member} />
+          ))}
+        </div>
+      </section>
+
+      {/* SECTION 4: REGISTRATION */}
+      <section
+        id="registration"
+        style={{
+          textAlign: "center",
+          padding: "40px 0",
+          backgroundColor: "#343a40",
+          color: "white",
+        }}
+      >
+        <h2>FORMULIR PENDAFTARAN</h2>
+        <p>Isi formulir singkat ini untuk mengamankan kursi Anda!</p>
+
+        {/* Placeholder untuk Form Pendaftaran Nyata */}
+        <div
+          style={{
+            padding: "20px",
+            backgroundColor: "#495057",
+            display: "inline-block",
+            borderRadius: "8px",
+          }}
+        >
+          {/* Di sini Anda bisa masukkan form HTML/React */}
+          <p>Form Pendaftaran akan diintegrasikan di sini.</p>
+          <p>Kontak: Muhammad Munirudin | WA: 08XX-XXXX-XXXX</p>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default FGDPage;
