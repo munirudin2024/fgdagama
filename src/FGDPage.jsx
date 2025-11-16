@@ -186,18 +186,6 @@ const FGDPage = () => {
         <h2>FORMULIR PENDAFTARAN</h2>
         <p>Isi formulir</p>
 
-        {/* Placeholder untuk Form Pendaftaran Nyata */}
-        <div
-          style={{
-            padding: "20px",
-            backgroundColor: "rgba(73, 80, 87, 0.8)",
-            display: "inline-block",
-            borderRadius: "8px",
-          }}
-        >
-          <p>kelompok 2</p>
-        </div>
-
         {/* --- BAGIAN REKAMAN YOUTUBE (SUDAH DIPINDAHKAN KE DALAM SECTION INI) --- */}
         <div
           style={{
