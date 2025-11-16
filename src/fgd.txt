@@ -1,0 +1,82 @@
+import React from 'react';
+
+// Fungsi untuk menyusun URL embed YouTube dari ID video
+const getEmbedUrl = (videoId) => {
+  return `https://www.youtube.com/embed/${videoId}`;
+};
+
+const DocumentationSection = () => {
+  // ID Video Tayo yang ditemukan
+  const videoId = "ThM0EdT1ByU"; 
+  const embedUrl = getEmbedUrl(videoId);
+
+  // Gaya untuk membungkus video (agar responsif)
+  const videoWrapperStyle = {
+    position: 'relative',
+    paddingBottom: '56.25%', // Rasio aspek 16:9
+    height: 0,
+    overflow: 'hidden',
+    maxWidth: '100%',
+    margin: '20px 0',
+  };
+
+  // Gaya untuk iframe (pemutar video)
+  const iframeStyle = {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    border: 'none',
+    borderRadius: '8px', // Agar terlihat lebih rapi
+    boxShadow: '0 4px 10px rgba(0,0,0,0.2)',
+  };
+
+  return (
+    <div style={{ padding: '20px', textAlign: 'center' }}>
+      
+      {/* Judul dan Deskripsi dari Gambar */}
+      <h3 style={{ margin: '0 0 5px 0', fontSize: '14px', color: '#666' }}>
+        kelompok 2
+      </h3>
+      <h2 style={{ fontSize: '2em', margin: '0 0 10px 0' }}>
+        DOKUMENTASI
+      </h2>
+      <p style={{ margin: '0 0 20px 0', color: '#333' }}>
+        Tonton kembali sesi diskusi kerukunan umat beragama dalam multi konteks
+      </p>
+
+      {/* Kontainer Video Responsif */}
+      <div style={videoWrapperStyle}>
+        <iframe
+          style={iframeStyle}
+          // PENTING: Menggunakan URL embed YouTube
+          src={embedUrl}
+          title="Tayo Lagu Pembukaan Tema Kompilasi I lagu untuk anak-anak"
+          // Atribut agar video bisa diputar otomatis, dsb.
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        ></iframe>
+      </div>
+      
+      {/* Link YouTube Asli (opsional, untuk tombol "Tonton di YouTube") */}
+      <a 
+        href={`http://www.youtube.com/watch?v=${videoId}`} 
+        target="_blank" 
+        rel="noopener noreferrer"
+        style={{ 
+          display: 'inline-block', 
+          marginTop: '15px', 
+          color: 'red', 
+          fontWeight: 'bold', 
+          textDecoration: 'none' 
+        }}
+      >
+        Tonton di YouTube
+      </a>
+      
+    </div>
+  );
+};
+
+export default DocumentationSection;
