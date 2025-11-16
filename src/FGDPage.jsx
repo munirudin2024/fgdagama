@@ -53,10 +53,10 @@ const FGDPage = () => {
       <header style={headerStyle}>
         <h3 style={{ margin: 0 }}>FOCUS GROUP DISCUSSION (FGD)</h3>
         <h1 style={{ margin: "5px 0 10px 0", fontSize: "3em" }}>
-          Rukun di Era Disrupsi
+          Rukun
         </h1>
         <p style={{ fontSize: "1.2em" }}>
-          Mewujudkan Kerukunan Umat Beragama dalam Multi Konteks Kehidupan
+          Kerukunan Umat Beragama dalam Multi Konteks
         </p>
 
         {/* Call to Action Utama */}
@@ -73,7 +73,7 @@ const FGDPage = () => {
             fontWeight: "bold",
           }}
         >
-          DAFTAR SEKARANG & JADI BAGIAN DARI SOLUSI!
+          join grub diskusi
         </a>
       </header>
 
@@ -89,15 +89,15 @@ const FGDPage = () => {
           }}
         >
           <div>
-            <h3>🗓️ Waktu</h3>
+            <h3>🗓️</h3>
             <p>Jumat, 22 November 2025</p>
           </div>
           <div>
-            <h3>⏰ Pukul</h3>
+            <h3>⏰</h3>
             <p>14.00 - 16.00 WIB</p>
           </div>
           <div>
-            <h3>📍 Tempat</h3>
+            <h3>📍</h3>
             <p>Ruang Rapat Digital, Gedung F | Kampus [Nama Kampus]</p>
           </div>
         </div>
@@ -110,7 +110,7 @@ const FGDPage = () => {
           }}
         >
           <h3>Manfaat</h3>
-          <p>E-Sertifikat, Wawasan Eksklusif, Networking Lintas Bidang.</p>
+          <p>wawasan eksklusif</p>
         </div>
       </section>
 
@@ -124,7 +124,7 @@ const FGDPage = () => {
             paddingBottom: "10px",
           }}
         >
-          TIM PENELITI & FASILITATOR
+          KELOMPOK 2
         </h2>
 
         {/* Dosen Pembimbing */}
@@ -155,7 +155,7 @@ const FGDPage = () => {
           </div>
         </div>
 
-        {/* Anggota Tim (15 Orang) */}
+        {/* Anggota */}
         <h3 style={{ textAlign: "center", marginTop: "40px" }}>
           Anggota Kelompok Riset (15 Orang)
         </h3>
@@ -182,10 +182,6 @@ const FGDPage = () => {
           color: "white",
         }}
       >
-        {/* Bagian Pendaftaran */}
-        <h2>FORMULIR PENDAFTARAN</h2>
-        <p>Isi formulir</p>
-
         {/* --- BAGIAN REKAMAN YOUTUBE (SUDAH DIPINDAHKAN KE DALAM SECTION INI) --- */}
         <div
           style={{
