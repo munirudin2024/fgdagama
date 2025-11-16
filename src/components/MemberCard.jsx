@@ -1,4 +1,3 @@
-// /src/components/MemberCard.jsx
 import React, { useState } from "react";
 
 const MemberCard = ({ member }) => {
@@ -7,16 +6,15 @@ const MemberCard = ({ member }) => {
   // Gaya untuk kartu secara keseluruhan
   const cardStyle = {
     // Ukuran dasar kartu
-    width: "240px", // Sedikit lebih lebar agar foto background terlihat
-    minHeight: "150px", // Tinggi minimum agar ada ruang untuk teks
+    width: "240px", 
     margin: "15px",
     borderRadius: "10px",
-    overflow: "hidden", // Penting untuk memastikan gambar background tidak keluar
+    overflow: "hidden", 
     boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
     transition: "transform 0.3s ease, box-shadow 0.3s ease",
     cursor: "pointer",
-    position: "relative", // Untuk menempatkan overlay atau foto profil di dalamnya
-    backgroundColor: "#fff", // Fallback jika gambar tidak loading
+    position: "relative", 
+    backgroundColor: "#fff", 
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
@@ -37,33 +35,34 @@ const MemberCard = ({ member }) => {
     transition: "height 0.3s ease", // Animasi perubahan tinggi
   };
 
-  // Gaya untuk teks nama dan peran di awal
+  // Gaya untuk teks nama di awal
   const initialTextStyle = {
     margin: 0,
-    fontSize: "1.2em",
+    fontSize: "0.1em",
     fontWeight: "bold",
-    textShadow: "1px 1px 3px rgba(0,0,0,0.7)", // Agar teks lebih jelas di atas gambar
+    textShadow: "1px 1px 3px rgba(0,0,0,0.7)", 
   };
 
   // Gaya untuk foto profil bundar yang muncul saat detail
   const profileImageStyle = {
     borderRadius: "50%",
-    width: "100px", // Foto diperbesar
+    width: "100px", 
     height: "100px",
     objectFit: "cover",
     border: "4px solid white",
     boxShadow: "0 4px 10px rgba(0,0,0,0.3)",
-    position: "absolute", // Penting: Letakkan di atas semua
-    top: "0px", // Jarak dari atas
-    left: `calc(50% - 50px)`, // Pusatkan (50% dari card - setengah lebar foto)
+    position: "absolute", 
+    top: "0px", 
+    left: `calc(50% - 50px)`, 
     zIndex: 10,
   };
 
   // Gaya untuk bagian konten utama kartu
   const contentStyle = {
-    padding: "15px",
+    // PENTING: Mengurangi padding di sini untuk memperkecil area putih
+    padding: "10px", 
     textAlign: "center",
-    flexGrow: 1, // Agar mengisi ruang yang tersedia
+    flexGrow: 1, 
   };
 
   // Gaya untuk teks detail yang disembunyikan
@@ -80,10 +79,42 @@ const MemberCard = ({ member }) => {
     opacity: showDetails ? 1 : 0,
   };
 
+  // Gaya baru untuk menggabungkan BAB dan Teks Klik
+  const combinedInfoStyle = {
+    // Padding vertical minimal agar area putih kecil
+    padding: "1px 0", 
+    fontSize: "12px",
+    color: "#555",
+    // Membuat teks BAB/Peran dan "Klik untuk Detail" menjadi satu baris
+    display: "flex", 
+    justifyContent: "space-between", // Memisahkan kedua teks
+    alignItems: "center",
+    borderTop: "1px solid #eee", // Garis pemisah tipis
+    marginTop: "1px", // Jarak dari nama
+  };
+  
+  // Gaya untuk teks klik saja (agar warnanya berbeda)
+  const clickTextStyle = {
+    color: "#007bff",
+    fontWeight: "bold",
+    cursor: "pointer",
+    textDecoration: "underline",
+    marginLeft: "10px",
+    flexShrink: 0 // Pastikan teks ini tidak menciut
+  };
+
+  // Fungsi untuk handle klik pada kartu
+  const handleCardClick = (e) => {
+    // Jika user mengklik link WA, jangan toggle detail
+    if (e.target.tagName !== 'A') {
+      setShowDetails(!showDetails);
+    }
+  };
+
   return (
     <div
       style={cardStyle}
-      onClick={() => setShowDetails(!showDetails)}
+      onClick={handleCardClick} // Menggunakan handler yang dimodifikasi
       onMouseEnter={(e) =>
         (e.currentTarget.style.transform = "translateY(-5px)")
       }
@@ -91,16 +122,15 @@ const MemberCard = ({ member }) => {
     >
       {/* Bagian Foto Latar / Profil */}
       <div style={backgroundPhotoStyle}>
-        {!showDetails ? (
-          // Tampilan awal: Nama dan Peran di atas gambar latar
+        {/* Tampilan awal: Hanya Nama di atas gambar latar */}
+        {!showDetails && (
           <div style={{ padding: "10px", width: "100%" }}>
             <p style={initialTextStyle}>{member.name}</p>
-            <p style={{ color: "white", fontSize: "0.9em", margin: 0 }}>
-              {member.role}
-            </p>
           </div>
-        ) : (
-          // Tampilan saat detail muncul: Foto profil bundar
+        )}
+        
+        {/* Tampilan saat detail muncul: Foto profil bundar */}
+        {showDetails && (
           <img
             src={member.imagePlaceholder}
             alt={`Foto ${member.name}`}
@@ -112,12 +142,14 @@ const MemberCard = ({ member }) => {
       {/* Bagian Konten Kartu */}
       <div style={contentStyle}>
         {showDetails && (
+          // Teks Nama dan Peran saat detail terbuka
           <>
-            <h4 style={{ margin: "15px 0", fontSize: "1.1em" }}>
+            {/* Mengubah margin agar nama tampil di bawah foto profil yang muncul */}
+            <h4 style={{ margin: "30px 0 0 0", fontSize: "0.8em" }}> 
               {member.name}
             </h4>
             <p
-              style={{ color: "#555", fontSize: "13px", margin: "0 0 10px 0" }}
+              style={{ color: "#555", fontSize: "0.5px", margin: "0 0 10px 0" }}
             >
               {member.role}
             </p>
@@ -127,7 +159,7 @@ const MemberCard = ({ member }) => {
         {/* Detail Interaktif */}
         <div style={detailsStyle}>
           <p style={{ margin: "5px 0" }}>
-            <strong>Kelas/Sem:</strong> {member.class} / {member.semester}
+            <strong>Kelas:</strong> {member.class} / {member.semester}
           </p>
           <p style={{ margin: "5px 0" }}>
             <strong>Domisili:</strong> {member.domicile}
@@ -148,11 +180,13 @@ const MemberCard = ({ member }) => {
           </p>
         </div>
 
-        {/* Teks "Klik untuk Detail" di awal */}
+        {/* Info Gabungan (BAB dan Klik Detail) - Hanya tampil saat detail tertutup */}
         {!showDetails && (
-          <p style={{ color: "#007bff", fontSize: "12px", marginTop: "10px" }}>
-            Klik untuk Detail Anggota
-          </p>
+          <div style={combinedInfoStyle}>
+            {/* Teks BAB I - Pendahuluan (Role) */}
+            <span style={{ fontWeight: '500' }}>{member.role}</span>
+            {/* Teks Klik untuk Detail */}
+          </div>
         )}
       </div>
     </div>

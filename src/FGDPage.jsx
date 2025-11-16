@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import MemberCard from "./components/MemberCard";
 import { lecturer, members } from "./data/fgdMembers";
 
@@ -6,20 +6,91 @@ import { lecturer, members } from "./data/fgdMembers";
 const BACKGROUND_IMAGE_URL =
   "https://unsia.ac.id/wp-content/uploads/2023/10/pic10.jpg";
 
-// Catatan: Ganti [ID_VIDEO_ANDA] dengan ID YouTube yang sebenarnya setelah video diunggah
-const YOUTUBE_VIDEO_ID = "ThM0EdT1ByU";
+// Ganti [ID_VIDEO_ANDA] dengan ID YouTube yang sebenarnya setelah video diunggah
+const YOUTUBE_VIDEO_ID = "xIyXA3c3oxU";
+
+// 💡 ID YouTube untuk Musik Latar
+const BGM_YOUTUBE_ID = "7VQ2C8d0vUo"; // Contoh ID: Musik Latar Belakang Santai
+
+// ID unik untuk elemen player BGM
+const BGM_PLAYER_ID = "bgm-youtube-player";
 
 const FGDPage = () => {
+  // 1. STATE UNTUK STATUS PEMUTARAN
+  const [isPlaying, setIsPlaying] = useState(false);
+  // 2. REF UNTUK MENYIMPAN OBJEK PEMAIN YOUTUBE
+  const playerRef = useRef(null);
+
+  // Fungsi untuk memuat YouTube Iframe API dan membuat objek pemain
+  useEffect(() => {
+    // Memastikan skrip YouTube API dimuat
+    if (!window.YT) {
+      const tag = document.createElement("script");
+      tag.src = "https://www.youtube.com/iframe_api";
+      const firstScriptTag = document.getElementsByTagName("script")[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    }
+
+    // Fungsi yang akan dipanggil ketika YouTube API siap
+    window.onYouTubeIframeAPIReady = () => {
+      // Membuat objek pemain YouTube
+      playerRef.current = new window.YT.Player(BGM_PLAYER_ID, {
+        videoId: BGM_YOUTUBE_ID,
+        playerVars: {
+          autoplay: 0, // Jangan autoplay di awal
+          loop: 1, // Atur untuk looping
+          playlist: BGM_YOUTUBE_ID, // Harus diatur untuk loop satu video
+          controls: 0, // Sembunyikan kontrol
+          showinfo: 0,
+          rel: 0,
+          modestbranding: 1,
+        },
+        events: {
+          // Ketika pemain siap, kita bisa mulai mengontrolnya
+          onReady: (event) => {
+            // Kita bisa menambahkan logika di sini jika diperlukan
+          },
+        },
+      });
+    };
+    
+    // Cleanup function: memastikan pemain dihentikan dan dihapus saat komponen dilepas
+    return () => {
+      if (playerRef.current) {
+        playerRef.current.destroy();
+      }
+    };
+  }, []); // [] agar hanya berjalan sekali saat mounting
+
+  // Fungsi untuk menangani pemutaran/jeda musik
+  const togglePlay = () => {
+    if (playerRef.current) {
+      const isCurrentlyPlaying = playerRef.current.getPlayerState() === window.YT.PlayerState.PLAYING;
+      
+      if (isCurrentlyPlaying || isPlaying) {
+        // Jeda
+        playerRef.current.pauseVideo();
+        setIsPlaying(false);
+      } else {
+        // Putar
+        playerRef.current.playVideo();
+        setIsPlaying(true);
+      }
+    }
+  };
+
+
   // Gaya untuk container utama (Full Page Background)
   const mainContainerStyle = {
+    // ... (Gaya lainnya tetap sama)
     fontFamily: "Arial, sans-serif",
-    padding: "0", // Hapus padding di container utama
+    padding: "0", 
     backgroundColor: "#f9f9f9",
     minHeight: "100vh",
 
     // Gaya untuk Gambar Latar Belakang
     backgroundImage: `url(${BACKGROUND_IMAGE_URL})`,
-    backgroundAttachment: "fixed", // Agar gambar tidak ikut scroll
+    backgroundAttachment: "fixed", 
     backgroundSize: "cover",
     backgroundPosition: "center",
   };
@@ -34,7 +105,7 @@ const FGDPage = () => {
     backgroundColor: "rgba(0, 0, 0, 0.65)",
     color: "white",
   };
-
+  
   // Gaya untuk konten di tengah (Detail & Team)
   const sectionContentStyle = {
     maxWidth: "1200px",
@@ -49,9 +120,23 @@ const FGDPage = () => {
 
   return (
     <div style={mainContainerStyle}>
+      {/* 🔇 IFRAME BGM TERSEMBUNYI (Hidden BGM Player) */}
+      {/* Kita menggunakan DIV dengan ID dan membiarkan YouTube API mengisi IFRAME ke dalamnya */}
+      <div
+          id={BGM_PLAYER_ID} // ⬅️ Ini adalah target API
+          style={{ 
+            position: "absolute", 
+            top: -100, // Posisikan di luar layar
+            left: -100,
+            width: 1, 
+            height: 1, 
+            overflow: 'hidden'
+          }} 
+      />
+      
       {/* SECTION 1: HEADER & JUDUL FGD */}
       <header style={headerStyle}>
-        <h3 style={{ margin: 0 }}>FOCUS GROUP DISCUSSION (FGD)</h3>
+        <h3 style={{ margin: 0 }}>FOCUS GROUP DISCUSSION</h3>
         <h1 style={{ margin: "5px 0 10px 0", fontSize: "3em" }}>
           Rukun
         </h1>
@@ -59,27 +144,30 @@ const FGDPage = () => {
           Kerukunan Umat Beragama dalam Multi Konteks
         </p>
 
-        {/* Call to Action Utama */}
-        <a
-          href="#registration"
+        {/* Call to Action Utama (Tombol Play/Pause) */}
+        <button
+          onClick={togglePlay} // ⬅️ Menggunakan fungsi togglePlay
           style={{
             display: "inline-block",
             marginTop: "25px",
-            padding: "12px 30px",
-            backgroundColor: "#28a745",
+            padding: "10px 25px",
+            backgroundColor: isPlaying ? "#dc3545" : "#28a745", // Merah saat Stop, Hijau saat Play
             color: "white",
-            textDecoration: "none",
+            border: "none",
             borderRadius: "50px",
             fontWeight: "bold",
+            cursor: "pointer",
+            fontSize: "0.8em",
+            transition: "background-color 0.3s ease",
           }}
         >
-          join grub diskusi
-        </a>
+          DAFTAR SEKARANG & JADI BAGIAN DARI SOLUSI!
+        </button>
       </header>
 
       {/* SECTION 2: DETAIL LOGISTIK */}
       <section style={sectionContentStyle}>
-        <h2 style={{ textAlign: "center", color: "#007bff" }}>DETAIL ACARA</h2>
+        <h2 style={{ textAlign: "center", color: "#007bff" }}>PRESENTASI KELOMPOK 2 PENDIDIKAN AGAMA</h2>
         <div
           style={{
             display: "flex",
@@ -97,7 +185,7 @@ const FGDPage = () => {
             <p>14.00 - 16.00 WIB</p>
           </div>
           <div>
-            <h3>📍</h3>
+            <h3>📍 Tempat</h3>
             <p>Ruang Rapat Digital, Gedung F | Kampus [Nama Kampus]</p>
           </div>
         </div>
@@ -110,7 +198,7 @@ const FGDPage = () => {
           }}
         >
           <h3>Manfaat</h3>
-          <p>wawasan eksklusif</p>
+          <p>E-Sertifikat, Wawasan Eksklusif, Networking Lintas Bidang.</p>
         </div>
       </section>
 
@@ -124,10 +212,10 @@ const FGDPage = () => {
             paddingBottom: "10px",
           }}
         >
-          KELOMPOK 2
+          TIM PENELITI & FASILITATOR
         </h2>
 
-        {/* Dosen Pembimbing */}
+        {/* Dosen Pembimbing 
         <div style={{ textAlign: "center", margin: "30px 0" }}>
           <h3 style={{ color: "#dc3545" }}>Dosen Pembimbing</h3>
           <div
@@ -139,7 +227,7 @@ const FGDPage = () => {
               backgroundColor: "#ffe5e5",
             }}
           >
-            {/* Asumsi: Gunakan imagePlaceholder Dosen */}
+            {/* Asumsi: Gunakan imagePlaceholder Dosen 
             <img
               src={lecturer.imagePlaceholder}
               alt={lecturer.name}
@@ -153,9 +241,10 @@ const FGDPage = () => {
             <h4 style={{ margin: "10px 0 5px 0" }}>{lecturer.name}</h4>
             <p>{lecturer.bio}</p>
           </div>
-        </div>
+        </div> */}
 
-        {/* Anggota */}
+
+        {/* Anggota Tim (15 Orang) */}
         <h3 style={{ textAlign: "center", marginTop: "40px" }}>
           Anggota Kelompok Riset (15 Orang)
         </h3>
@@ -172,8 +261,8 @@ const FGDPage = () => {
         </div>
       </section>
 
-      {/* SECTION 4: REGISTRATION & DOCUMENTATION */}
-      <section
+{/* SECTION 4: REGISTRATION & DOCUMENTATION */}
+<section
         id="registration"
         style={{
           textAlign: "center",
@@ -182,6 +271,22 @@ const FGDPage = () => {
           color: "white",
         }}
       >
+        {/* Bagian Pendaftaran */}
+        <h2>FORMULIR PENDAFTARAN</h2>
+        <p>Isi formulir</p>
+
+        {/* Placeholder untuk Form Pendaftaran Nyata */}
+        <div
+          style={{
+            padding: "20px",
+            backgroundColor: "rgba(73, 80, 87, 0.8)",
+            display: "inline-block",
+            borderRadius: "8px",
+          }}
+        >
+          <p>kelompok 2</p>
+        </div>
+
         {/* --- BAGIAN REKAMAN YOUTUBE (SUDAH DIPINDAHKAN KE DALAM SECTION INI) --- */}
         <div
           style={{
