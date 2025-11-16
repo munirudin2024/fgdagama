@@ -6,15 +6,15 @@ const MemberCard = ({ member }) => {
   // Gaya untuk kartu secara keseluruhan
   const cardStyle = {
     // Ukuran dasar kartu
-    width: "240px", 
+    width: "240px",
     margin: "15px",
     borderRadius: "10px",
-    overflow: "hidden", 
+    overflow: "hidden",
     boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
     transition: "transform 0.3s ease, box-shadow 0.3s ease",
     cursor: "pointer",
-    position: "relative", 
-    backgroundColor: "#fff", 
+    position: "relative",
+    backgroundColor: "#fff",
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
@@ -40,29 +40,29 @@ const MemberCard = ({ member }) => {
     margin: 0,
     fontSize: "0.1em",
     fontWeight: "bold",
-    textShadow: "1px 1px 3px rgba(0,0,0,0.7)", 
+    textShadow: "1px 1px 3px rgba(0,0,0,0.7)",
   };
 
   // Gaya untuk foto profil bundar yang muncul saat detail
   const profileImageStyle = {
     borderRadius: "50%",
-    width: "100px", 
+    width: "100px",
     height: "100px",
     objectFit: "cover",
     border: "4px solid white",
     boxShadow: "0 4px 10px rgba(0,0,0,0.3)",
-    position: "absolute", 
-    top: "0px", 
-    left: `calc(50% - 50px)`, 
+    position: "absolute",
+    top: "0px",
+    left: `calc(50% - 50px)`,
     zIndex: 10,
   };
 
   // Gaya untuk bagian konten utama kartu
   const contentStyle = {
     // PENTING: Mengurangi padding di sini untuk memperkecil area putih
-    padding: "10px", 
+    padding: "10px",
     textAlign: "center",
-    flexGrow: 1, 
+    flexGrow: 1,
   };
 
   // Gaya untuk teks detail yang disembunyikan
@@ -79,20 +79,44 @@ const MemberCard = ({ member }) => {
     opacity: showDetails ? 1 : 0,
   };
 
+  // --- START: Gaya Flexbox untuk Penyejajaran Titik Dua ---
+  
+  // 1. Gaya untuk kontainer setiap baris (Membuat 2 kolom)
+  const detailItemStyle = {
+    display: "flex",
+    margin: "5px 0",
+    lineHeight: "1.2", // Merapikan jarak antar baris
+  };
+  
+  // 2. Gaya untuk kolom label/judul
+  const labelStyle = {
+    fontWeight: "bold",
+    // 85px cukup untuk "Domisili" dan "Linkedin" + titik dua + spasi
+    width: "85px", 
+    flexShrink: 0, // Mencegah kolom ini menciut
+  };
+  
+  // 3. Gaya untuk kolom nilai
+  const valueStyle = {
+    flexGrow: 1, // Membiarkan nilai mengisi sisa ruang
+  }
+
+  // --- END: Gaya Flexbox untuk Penyejajaran Titik Dua ---
+
   // Gaya baru untuk menggabungkan BAB dan Teks Klik
   const combinedInfoStyle = {
     // Padding vertical minimal agar area putih kecil
-    padding: "1px 0", 
+    padding: "1px 0",
     fontSize: "12px",
     color: "#555",
     // Membuat teks BAB/Peran dan "Klik untuk Detail" menjadi satu baris
-    display: "flex", 
+    display: "flex",
     justifyContent: "space-between", // Memisahkan kedua teks
     alignItems: "center",
     borderTop: "1px solid #eee", // Garis pemisah tipis
     marginTop: "1px", // Jarak dari nama
   };
-  
+
   // Gaya untuk teks klik saja (agar warnanya berbeda)
   const clickTextStyle = {
     color: "#007bff",
@@ -128,7 +152,7 @@ const MemberCard = ({ member }) => {
             <p style={initialTextStyle}>{member.name}</p>
           </div>
         )}
-        
+
         {/* Tampilan saat detail muncul: Foto profil bundar */}
         {showDetails && (
           <img
@@ -145,30 +169,41 @@ const MemberCard = ({ member }) => {
           // Teks Nama dan Peran saat detail terbuka
           <>
             {/* Mengubah margin agar nama tampil di bawah foto profil yang muncul */}
-            <h4 style={{ margin: "30px 0 0 0", fontSize: "0.8em" }}> 
+            <h4 style={{ margin: "30px 0 0 0", fontSize: "0.8em" }}>
               {member.name}
             </h4>
             <p
               style={{ color: "#555", fontSize: "0.5px", margin: "0 0 10px 0" }}
             >
-              {member.role}
+              {member.nim}
             </p>
           </>
         )}
 
-        {/* Detail Interaktif */}
+        {/* Detail Interaktif (Bagian yang Dirapikan) */}
         <div style={detailsStyle}>
-          <p style={{ margin: "5px 0" }}>
-            <strong>Kelas:</strong> {member.class} / {member.semester}
-          </p>
-          <p style={{ margin: "5px 0" }}>
-            <strong>Domisili:</strong> {member.domicile}
-          </p>
-          <p style={{ margin: "5px 0" }}>
-            <strong>Hobi:</strong> {member.hobby}
-          </p>
-          <p style={{ margin: "5px 0" }}>
-            <strong>WA:</strong>{" "}
+          
+          {/* Item 1: Agama */}
+          <div style={detailItemStyle}>
+            <span style={labelStyle}>Agama</span>
+            <span style={valueStyle}>{member.agama}</span>
+          </div>
+          
+          {/* Item 2: Domisili */}
+          <div style={detailItemStyle}>
+            <span style={labelStyle}>Domisili</span>
+            <span style={valueStyle}>{member.domisili}</span>
+          </div>
+          
+          {/* Item 3: Email */}
+          <div style={detailItemStyle}>
+            <span style={labelStyle}>Kelas</span>
+            <span style={valueStyle}>{member.kelas}</span>
+          </div>
+          
+          {/* Item 4: Linkedin / WA Link */}
+          <div style={detailItemStyle}>
+            <span style={labelStyle}>Wa</span>
             <a
               href={`https://wa.me/${member.wa}`}
               target="_blank"
@@ -177,7 +212,7 @@ const MemberCard = ({ member }) => {
             >
               {member.wa}
             </a>
-          </p>
+          </div>
         </div>
 
         {/* Info Gabungan (BAB dan Klik Detail) - Hanya tampil saat detail tertutup */}
