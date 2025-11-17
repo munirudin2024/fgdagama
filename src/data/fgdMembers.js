@@ -17,7 +17,9 @@ export const members = [
     domisili: "Bali",
     agama: "Hindu",
     wa: "0858 2937 5098",
-    imagePlaceholder:"/fgdagama/public/buana.jpg",
+    //imagePlaceholder:"/fgdagama/public/buana.jpg",
+    imagePlaceholder:"/buana.jpg",
+
   },
   {
     id: 2,
