@@ -162,7 +162,9 @@ export const members = [
     domisili: "Demak",
     agama: "Islam",
     wa: "0813 3769 4488",
-    imagePlaceholder:"/fgdagama/public/muni.jpg",
+    //imagePlaceholder:"/fgdagama/public/muni.jpg",
+    imagePlaceholder:"muni.jpg",
+
 
   },
   {
