@@ -157,6 +157,7 @@ const MemberCard = ({ member }) => {
         {showDetails && (
           <img
             src={member.imagePlaceholder}
+            //src={`${process.env.PUBLIC_URL}${member.imagePlaceholder}`}
             alt={`Foto ${member.name}`}
             style={profileImageStyle}
           />

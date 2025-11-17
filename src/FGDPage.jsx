@@ -6,7 +6,8 @@ const BACKGROUND_IMAGE_URL =
 "https://unsia.ac.id/wp-content/uploads/2023/10/pic10.jpg";
 
 const YOUTUBE_VIDEO_ID = "_VfAP45O3_w";
-const BGM_YOUTUBE_ID = "WhqEGF5LoDk"; 
+//const BGM_YOUTUBE_ID = "WhqEGF5LoDk";//pop
+const BGM_YOUTUBE_ID = "gKmd_iOGNVI"; //religi
 const BGM_PLAYER_ID = "bgm-youtube-player";
 
 const SLIDE_EMBED_URL = ""; 
