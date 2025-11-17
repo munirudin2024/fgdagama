@@ -2,6 +2,7 @@
   "name": "workspace",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://<username>.github.io/fgdagama/",
   "type": "module",
   "scripts": {
     "dev": "vite",

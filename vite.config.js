@@ -6,6 +6,7 @@ const repoName = 'fgdagama';
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: `/${repoName}/`, 
+  //base: `/${repoName}/`, 
+  base: '/fgdagama/',
   plugins: [react()],
 })
