@@ -18,7 +18,7 @@ export const members = [
     agama: "Hindu",
     wa: "0858 2937 5098",
     //imagePlaceholder:"/fgdagama/public/buana.jpg",
-    imagePlaceholder:"/buana.jpg",
+    imagePlaceholder:"docs/assets/buana.jpg",
 
   },
   {
