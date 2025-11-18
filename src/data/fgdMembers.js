@@ -83,17 +83,19 @@ export const members = [
     agama: "",
     wa: "",
   },
-  {
+*/{
     id: 8,
     name: "MUHAMMAD IRFAN MAULANA",
     role: "Pembahasan: Pentingnya Kerukunan",
-    nim: "",
+    nim: "240101010025",
     kelas: "SI303",
-    domisili: "",
-    agama: "",
-    wa: "",
+    domisili: "Jakarta",
+    agama: "Islam",
+    wa: "0821 1261 9129",
+    imagePlaceholder:"mau.jpeg",
+
   },
-  */{
+  {
     id: 9,
     name: "MUHAMMAD DAFFA ADSYA ALFAWAZI",
     role: "Pembahasan: Faktor yang Mempengaruhi",
