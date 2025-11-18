@@ -222,7 +222,7 @@ const MeetingInfoInteractive = () => {
         </div>
         
         <div style={{ textAlign: 'center', marginTop: '10px' }}>
-          <p style={{ fontSize: '25px', fontWeight: 'bold', color: '#28a745', margin: '5px 0' }}>14:00 - 16:00</p>
+          <p style={{ fontSize: '25px', fontWeight: 'bold', color: '#28a745', margin: '5px 0' }}>14:00 - 17:30</p>
           <p style={{ color: '#666', fontSize: '16px', margin: 0 }}>WIB</p>
         </div>
       </div>

@@ -21,7 +21,7 @@ export const members = [
     imagePlaceholder:"buana.jpg",
 
   },
-  {
+  /*{
     id: 2,
     name: "MOHAMAD LUKMAN PRASANTO KARIM",
     role: "Kajian Teori: Hakikat Rukun",
@@ -109,18 +109,18 @@ export const members = [
     wa: "628xxx",
     imagePlaceholder: "https://via.placeholder.com/100/FFA07A/000000?text=Daffa",
   },
-  {
+  */{
     id: 10,
     name: "MUHAMMAD HABIBI PRISA",
     role: "Pembahasan: Tantangan dan Hambatan",
-    nim: "202107010",
-    kelas: "SI 303",
-    domisili: "Tangerang",
+    nim: "240101010072",
+    kelas: "SI303",
+    domisili: "Bekasi",
     agama: "Islam",
-    wa: "628xxx",
-    imagePlaceholder: "https://via.placeholder.com/100/E0FFFF/000000?text=Habibi",
+    wa: "0838 7408 3841",
+    imagePlaceholder: "habib.jpg",
   },
-  {
+  /*{
     id: 11,
     name: "NEZAR HELMI ATHALLAH",
     role: "Pembahasan: Upaya dan Strategi",
@@ -153,7 +153,7 @@ export const members = [
     wa: "628xxx",
     imagePlaceholder: "https://via.placeholder.com/100/87CEFA/000000?text=Misbachul",
   },
-  {
+  */{
     id: 14,
     name: "MUHAMMAD MUNIRUDIN",
     role: "Penutup",
@@ -167,15 +167,5 @@ export const members = [
 
 
   },
-  {
-    id: 15,
-    name: "[Anggota Tambahan 15]",
-    role: "Asisten Peneliti",
-    nim: "202107015",
-    kelas: "A",
-    domisili: "Jakarta",
-    agama: "Islam",
-    wa: "628xxx",
-    imagePlaceholder: "https://via.placeholder.com/100/C0C0C0/000000?text=Anggota15",
-  },
+ 
 ];
