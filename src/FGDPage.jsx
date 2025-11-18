@@ -5,9 +5,9 @@ import { lecturer, members } from "./data/fgdMembers";
 const BACKGROUND_IMAGE_URL =
 "https://unsia.ac.id/wp-content/uploads/2023/10/pic10.jpg";
 
-const YOUTUBE_VIDEO_ID = "_VfAP45O3_w";
+const YOUTUBE_VIDEO_ID = "_VfAP45O3_w"; // Video Record Presentasi
 //const BGM_YOUTUBE_ID = "WhqEGF5LoDk";//pop
-const BGM_YOUTUBE_ID = "gKmd_iOGNVI"; //religi
+const BGM_YOUTUBE_ID = "gKmd_iOGNVI"; //religi (BGM)
 const BGM_PLAYER_ID = "bgm-youtube-player";
 
 const SLIDE_EMBED_URL = "https://www.canva.com/design/DAG5C5euF0w/JuN1NaQaTE7nt2vBgCcr6g/edit?utm_content=DAG5C5euF0w&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"; 
@@ -194,10 +194,6 @@ const MeetingInfoInteractive = () => {
         flex: '1 1 280px',
         minWidth: '280px'
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
-          <span style={{ fontSize: '28px' }}></span>
-          <h3 style={{ fontSize: '22px', fontWeight: 'bold', color: '#007bff', margin: 0 }}></h3>
-        </div>
         
         <div style={{
           background: 'linear-gradient(135deg, #007bff 0%, #0056b3 100%)',
@@ -293,23 +289,30 @@ const MeetingInfoInteractive = () => {
 
       {/* Jam Analog HIDUP (Live Clock) */}
       <div style={{
-        backgroundColor: 'white',
+        //backgroundColor: 'white',
         borderRadius: '12px',
-        boxShadow: '0 8px 16px rgba(0,0,0,0.15)',
+        //boxShadow: '0 8px 16px rgba(0,0,0,0.15)',
         padding: '25px',
         flex: '1 1 280px',
         minWidth: '280px'
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
-          <span style={{ fontSize: '28px' }}></span>
-          <h3 style={{ fontSize: '22px', fontWeight: 'bold', color: '#007bff', margin: 0  }}></h3>
-        </div>
+
         
         {/* Panggil LiveClock di sini */}
         <LiveClock />
         
         <div style={{ textAlign: 'center', marginTop: '10px', }}>
-          <p style={{ fontSize: '25px', fontWeight: 'bold', color: '#28a745', margin: '5px 0' }}>14:00 - 17:30</p>
+          <p style={{
+                display: 'inline-block',
+                background: 'linear-gradient(135deg, #007bff 0%, #0056b3 100%)',
+                color: 'white',
+                padding: '12px 24px',
+                borderRadius: '8px',
+                fontWeight: '600',
+                textDecoration: 'none',
+                boxShadow: '0 4px 12px rgba(0,123,255,0.3)',
+                transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+              }}>14:00 - 17:30</p>
         </div>
       </div>
 
@@ -322,11 +325,7 @@ const MeetingInfoInteractive = () => {
         flex: '1 1 280px',
         minWidth: '280px'
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
-          <span style={{ fontSize: '28px' }}></span>
-          <h3 style={{ fontSize: '22px', fontWeight: 'bold', color: '#007bff', margin: 0  }}></h3>
-        </div>
-        
+
         <div style={{ 
           display: 'flex', 
           flexDirection: 'column', 
@@ -384,7 +383,7 @@ const MeetingInfoInteractive = () => {
                 e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,123,255,0.3)';
               }}
             >
-              Gabung Zoom Meeting
+              🎥 Gabung Zoom Meeting
             </a>
           </div>
         </div>
@@ -474,15 +473,24 @@ backgroundColor: "rgba(0, 0, 0, 0.65)",
 color: "white",
 };
 
-// Gaya untuk konten di tengah
+// Gaya untuk konten di tengah (tetap dengan maxWidth untuk konten non-embed)
 const sectionContentStyle = {
 maxWidth: "1200px",
 margin: "30px auto",
-//padding: "20px",
+padding: "20px", // Tambahkan padding lagi agar kalender/jam tidak terlalu mepet
 borderRadius: "12px",
 //backgroundColor: "rgba(255, 255, 255, 0.95)",
 //boxShadow: "0 8px 16px rgba(0,0,0,0.2)",
 };
+
+// Gaya khusus untuk konten yang ingin Full Width
+const fullWidthSectionStyle = {
+    textAlign: "center",
+    padding: "40px 0",
+    //backgroundColor: "rgba(52, 58, 64, 0.9)",
+    color: "white",
+};
+
 
 return (
 <div style={mainContainerStyle}>
@@ -509,10 +517,11 @@ Konsep Kerukunan Umat Beragama dan Implementasinya dalam Multi Konteks
 Topik ini mengarah pada pembahasan tentang bagaimana nilai-nilai kerukunan umat beragama dipahami, diterapkan, dan dikembangkan dalam berbagai bidang kehidupan di Indonesia sebagai upaya memperkuat toleransi, moderasi beragama, dan persatuan nasional.
 </p>
 
-{/* Call to Action Utama (Tombol Play/Pause) */}
+{/* Call to Action Utama (Tombol Play/Pause BARU) */}
+
 <button
-onClick={togglePlay} 
-style={{
+    onClick={togglePlay} 
+    style={{
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -532,10 +541,10 @@ style={{
         boxShadow: "0 6px 15px rgba(0,0,0,0.4)"
     }}
     onMouseEnter={(e) => {
-        e.currentTarget.style.transform = 'scale(0.9)';
+        e.currentTarget.style.transform = 'scale(1.1)'; // Efek hover
     }}
     onMouseLeave={(e) => {
-        e.currentTarget.style.transform = 'scale(0.8)';
+        e.currentTarget.style.transform = 'scale(1)';
     }}
 >
     {/* Ikon Play (▶️) atau Pause (⏸️) */}
@@ -561,7 +570,20 @@ style={{
 </section>
 
 {/* SECTION 3: TEAM & INTERACTIVE PROFILES */}
-<section style={sectionContentStyle}>
+<section style={{sectionContentStyle, textAlign: "center"}}>
+<h3 
+              style={{
+                display: 'inline-block',
+                background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.65))',
+                color: 'white',
+                padding: '12px 24px',
+                borderRadius: '8px',
+                fontWeight: '600',
+                textDecoration: 'none',
+                boxShadow: '0 4px 12px rgba(0,123,255,0.3)',
+                transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+              }}
+>ANGGOTA KELOMPOK 2</h3>
 <div
 style={{
 display: "flex",
@@ -575,28 +597,61 @@ justifyContent: "center",
 </div>
 </section>
 
-{/* SECTION 4: REGISTRATION & DOCUMENTATION */}
+{/* SECTION 4: DOCUMENTATION - FULL WIDTH */}
 <section
-id="registration"
+id="documentation"
+style={fullWidthSectionStyle}
+>
+
+{/* Container disetel agar mengisi lebar 100% dari section, tapi tetap memiliki margin horizontal untuk tampilan responsif yang bagus */}
+<div
 style={{
-textAlign: "center",
-padding: "40px 0",
-backgroundColor: "rgba(52, 58, 64, 0.9)",
-color: "white",
+    marginTop: "50px",
+    maxWidth: "1200px", // Memastikan konten maksimal 1200px
+    margin: "50px auto 0 auto", // Tengah otomatis
+    padding: "0 20px", // Tambahkan padding horizontal agar tidak menempel di tepi HP
 }}
 >
 
-<div
-style={{
-marginTop: "50px",
-maxWidth: "800px",
-margin: "50px auto 0 auto",
-padding: "0 20px",
-}}
->
+{/* 📹 EMBED VIDEO YOUTUBE (Recording) */}
+{/*  
+<div style={{ margin: "40px 0 30px 0" }}>
+    <h3 style={{ marginBottom: "15px", color: "#ff4500" }}>
+    </h3>
+    <div
+        style={{
+            position: "relative",
+            paddingBottom: "56.25%", // 16:9 Aspect Ratio
+            height: 0,
+            overflow: "hidden",
+            maxWidth: "100%",
+            background: "black",
+            borderRadius: "8px",
+        }}
+    >
+        <iframe
+            width="100%"
+            height="100%"
+            src={`https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}`}
+            title="Video Recording FGD"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                border: "2px solid #ff4500", 
+            }}
+        ></iframe>
+    </div>
+</div>
+*/}
 
 {/* 🚀 EMBED SLIDE PRESENTASI */}
 <div style={{ margin: "40px 0 30px 0" }}>
+<h3 style={{ marginBottom: "15px", color: "#66aaff" }}>
+</h3>
 <div
 style={{
 position: "relative",
@@ -627,6 +682,8 @@ border: "2px solid #007bff",
 
 {/* 📄 EMBED ARTIKEL LENGKAP */}
 <div style={{ margin: "40px 0 30px 0" }}>
+<h3 style={{ marginBottom: "15px", color: "#66aaff" }}>
+</h3>
 <div
 style={{
 position: "relative",
@@ -656,25 +713,24 @@ border: "2px solid #28a745",
 
 {/* Tautan Unduh opsional */}
 <p style={{ margin: "25px 0 10px 0", fontSize: "1em", fontWeight: "bold", color: "white" }}>
-Download Artikel
 </p>
 <a
 href={ARTIKEL_LINK_DOWNLOAD}
 target="_blank"
 rel="noopener noreferrer"
-style={{
-display: "inline-block",
-margin: "10px auto",
-padding: "10px 20px",
-backgroundColor: "#28a745",
-color: "white",
-textDecoration: "none",
-borderRadius: "5px",
-width: "fit-content",
-fontWeight: "500",
-}}
+              style={{
+                display: 'inline-block',
+                background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.65))',
+                color: 'white',
+                padding: '12px 24px',
+                borderRadius: '8px',
+                fontWeight: '600',
+                textDecoration: 'none',
+                boxShadow: '0 4px 12px rgba(0,123,255,0.3)',
+                transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+              }}
 >
-download
+download artkel
 </a>
 </div>
 </div>
