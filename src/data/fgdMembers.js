@@ -51,17 +51,19 @@ export const members = [
     agama: "",
     wa: "",
   },
-  {
+  */{
     id: 5,
     name: "JIHAN LESTARI",
     role: "Pembahasan: Konteks Individu & Lokal",
-    nim: "",
+    nim: "240101010054",
     kelas: "SI303",
-    domisili: "",
-    agama: "",
-    wa: "",
+    domisili: "Jepang",
+    agama: "Islam",
+    wa: "+818073584101",
+    imagePlaceholder:"jihan.jpeg",
+
   },
-  {
+  /*{
     id: 6,
     name: "NIRMALA AYU SANTIKADEWI",
     role: "Pembahasan: Konteks Sosial & Pendidikan",
