@@ -10,19 +10,150 @@ const YOUTUBE_VIDEO_ID = "_VfAP45O3_w";
 const BGM_YOUTUBE_ID = "gKmd_iOGNVI"; //religi
 const BGM_PLAYER_ID = "bgm-youtube-player";
 
-const SLIDE_EMBED_URL = ""; 
-const ARTIKEL_EMBED_URL = ""; 
-const ARTIKEL_LINK_DOWNLOAD = "";
+const SLIDE_EMBED_URL = "https://www.canva.com/design/DAG5C5euF0w/JuN1NaQaTE7nt2vBgCcr6g/edit?utm_content=DAG5C5euF0w&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"; 
+const ARTIKEL_EMBED_URL = "https://docs.google.com/document/d/17EdMmsnIo_dvue0GOgu1-xo5dyGXHGZZbyTpx-Je9vI/edit?usp=sharing"; 
+const ARTIKEL_LINK_DOWNLOAD = "https://docs.google.com/document/d/17EdMmsnIo_dvue0GOgu1-xo5dyGXHGZZbyTpx-Je9vI/edit?usp=sharing"; 
+
+
+// ===== KOMPONEN JAM ANALOG HIDUP (LIVE CLOCK) =====
+const LiveClock = () => {
+  // State untuk menyimpan waktu saat ini
+  const [time, setTime] = useState(new Date());
+
+  // useEffect untuk memperbarui waktu setiap 1 detik
+  useEffect(() => {
+    const timerId = setInterval(() => {
+      setTime(new Date());
+    }, 1000); // Update setiap 1000 milidetik (1 detik)
+
+    // Cleanup function: Hentikan interval ketika komponen dilepas
+    return () => clearInterval(timerId);
+  }, []); // Array dependensi kosong agar hanya berjalan sekali saat mount
+
+  // Ambil jam, menit, dan detik
+  const hours = time.getHours();
+  const minutes = time.getMinutes();
+  const seconds = time.getSeconds();
+
+  // Hitung Sudut Jarum (dikonversi dari 0 ke 360 derajat)
+  const secondAngle = seconds * 6; 
+  const minuteAngle = minutes * 6 + (seconds / 60) * 6; 
+  const hourAngle = (hours % 12) * 30 + minutes * 0.5; 
+
+  return (
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '30px 0' }}>
+      <div style={{
+        position: 'relative',
+        width: '200px',
+        height: '200px',
+        borderRadius: '50%',
+        border: '8px solid #e9ecef',
+        boxShadow: 'inset 0 0 20px rgba(0,0,0,0.1)',
+        background: 'linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%)'
+      }}>
+        {/* Angka jam */}
+        {[12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((num, i) => {
+          const angle = (i * 30 - 90) * (Math.PI / 180);
+          const x = Math.cos(angle) * 70;
+          const y = Math.sin(angle) * 70;
+          return (
+            <div
+              key={num}
+              style={{
+                position: 'absolute',
+                fontSize: '14px',
+                fontWeight: 'bold',
+                color: '#333',
+                transform: `translate(${x}px, ${y}px)`,
+                left: '50%',
+                top: '50%',
+                marginLeft: '-7px',
+                marginTop: '-10px'
+              }}
+            >
+              {num}
+            </div>
+          );
+        })}
+        
+        {/* Titik tengah */}
+        <div style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          width: '12px',
+          height: '12px',
+          backgroundColor: '#dc3545',
+          borderRadius: '50%',
+          transform: 'translate(-50%, -50%)',
+          zIndex: 10
+        }}></div>
+        
+        {/* Jarum jam */}
+        <div style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          width: '6px',
+          height: '50px',
+          backgroundColor: '#212529',
+          borderRadius: '3px',
+          transformOrigin: 'bottom center',
+          transform: `translate(-50%, -100%) rotate(${hourAngle}deg)`,
+          zIndex: 7
+        }}></div>
+        
+        {/* Jarum menit */}
+        <div style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          width: '4px',
+          height: '70px',
+          backgroundColor: '#007bff',
+          borderRadius: '2px',
+          transformOrigin: 'bottom center',
+          transform: `translate(-50%, -100%) rotate(${minuteAngle}deg)`,
+          zIndex: 8
+        }}></div>
+
+        {/* Jarum DETIK */}
+        <div style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          width: '2px',
+          height: '80px',
+          backgroundColor: '#dc3545',
+          borderRadius: '1px',
+          transformOrigin: 'bottom center',
+          transform: `translate(-50%, -100%) rotate(${secondAngle}deg)`,
+          zIndex: 9
+        }}></div>
+      </div>
+    </div>
+  );
+};
+
 
 // ===== KOMPONEN MEETING INFO INTERAKTIF =====
 const MeetingInfoInteractive = () => {
-  // Tanggal rapat
+  // Tanggal rapat (STATIS)
   const meetingDate = 22;
   const meetingMonth = 10; // November (0-indexed)
   const meetingYear = 2025;
   
+  // Tanggal saat ini (LIVE)
+  const currentDate = new Date();
+  const currentDay = currentDate.getDate();
+  const currentMonth = currentDate.getMonth();
+  const currentYear = currentDate.getFullYear();
+  
+  // Check apakah kalender yang ditampilkan adalah bulan/tahun saat ini
+  const isCurrentMonthYear = currentMonth === meetingMonth && currentYear === meetingYear;
+  
   // Link Zoom - GANTI DENGAN LINK ZOOM ANDA
-  const zoomLink = "https://zoom.us/j/your-meeting-id";
+  const zoomLink = "https://us05web.zoom.us/j/82427591354?pwd=r15NWdZXn61BYW1Nb8YArreaGadQoP.1";
 
   // Generate calendar untuk November 2025
   const getDaysInMonth = (month, year) => {
@@ -44,12 +175,6 @@ const MeetingInfoInteractive = () => {
   const days = getDaysInMonth(meetingMonth, meetingYear);
   const weekDays = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
 
-  // Jam analog untuk waktu meeting (14:00)
-  const meetingHour = 14;
-  const meetingMinute = 0;
-  
-  const hourAngle = (meetingHour % 12) * 30 + meetingMinute * 0.5;
-  const minuteAngle = meetingMinute * 6;
 
   return (
     <div style={{
@@ -60,7 +185,7 @@ const MeetingInfoInteractive = () => {
       marginTop: '30px'
     }}>
       
-      {/* Kalender */}
+      {/* Kalender Interaktif */}
       <div style={{
         backgroundColor: 'white',
         borderRadius: '12px',
@@ -70,8 +195,8 @@ const MeetingInfoInteractive = () => {
         minWidth: '280px'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
-          <span style={{ fontSize: '28px' }}>📅</span>
-          <h3 style={{ fontSize: '22px', fontWeight: 'bold', color: '#007bff', margin: 0 }}>Tanggal Presentasi</h3>
+          <span style={{ fontSize: '28px' }}></span>
+          <h3 style={{ fontSize: '22px', fontWeight: 'bold', color: '#007bff', margin: 0 }}></h3>
         </div>
         
         <div style={{
@@ -102,36 +227,71 @@ const MeetingInfoInteractive = () => {
             </div>
           ))}
           
-          {days.map((day, index) => (
-            <div
-              key={index}
-              style={{
+          {days.map((day, index) => {
+            const isMeetingDay = day === meetingDate;
+            const isToday = day === currentDay && isCurrentMonthYear; 
+            
+            // Base style for any valid day
+            let style = {
                 textAlign: 'center',
                 padding: '8px',
                 fontSize: '14px',
                 borderRadius: '6px',
-                ...(day === meetingDate ? {
-                  background: 'linear-gradient(135deg,  #007bff 0%, #0056b3 100%)',
-                  color: 'white',
-                  fontWeight: 'bold',
-                  boxShadow: '0 4px 8px rgba(220,53,69,0.4)',
-                  transform: 'scale(1.1)',
-                  animation: 'pulse 2s infinite'
-                } : day ? {
-                  color: '#333',
-                  cursor: 'pointer'
-                } : {})
-              }}
-            >
-              {day}
-            </div>
-          ))}
+                color: day ? '#333' : 'transparent', 
+                cursor: day ? 'pointer' : 'default',
+                backgroundColor: day ? 'transparent' : 'transparent'
+            };
+            
+            if (day) {
+                if (isMeetingDay) {
+                    // Style Tanggal Presentasi (Prioritas 1: Biru, Berkedip)
+                    style = {
+                        ...style,
+                        background: 'linear-gradient(135deg,  #007bff 0%, #0056b3 100%)',
+                        color: 'white',
+                        fontWeight: 'bold',
+                        boxShadow: '0 4px 8px rgba(0,123,255,0.4)',
+                        transform: 'scale(1.1)',
+                        animation: 'pulse 2s infinite',
+                        cursor: 'default'
+                    };
+                }
+                
+                // Style Hari Ini (Prioritas 2: Hijau, Garis tepi), diterapkan di atas jika bukan Hari Presentasi
+                if (isToday && !isMeetingDay) {
+                    style = {
+                        ...style,
+                        border: '2px solid #28a745', // Green border
+                        backgroundColor: '#d4edda', // Light green background
+                        color: '#155724',
+                        fontWeight: 'bold',
+                        cursor: 'pointer'
+                    };
+                } else if (!isMeetingDay && !isToday) {
+                    // Style Hari Normal
+                    style = {
+                        ...style,
+                        color: '#333',
+                        cursor: 'pointer'
+                    };
+                }
+            }
+
+            return (
+              <div
+                key={index}
+                style={style}
+              >
+                {day}
+              </div>
+            );
+          })}
         </div>
         
   
       </div>
 
-      {/* Jam Analog */}
+      {/* Jam Analog HIDUP (Live Clock) */}
       <div style={{
         backgroundColor: 'white',
         borderRadius: '12px',
@@ -141,89 +301,15 @@ const MeetingInfoInteractive = () => {
         minWidth: '280px'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
-          <span style={{ fontSize: '28px' }}>⏰</span>
-          <h3 style={{ fontSize: '22px', fontWeight: 'bold', color: '#007bff', margin: 0  }}>Waktu Presentasi</h3>
+          <span style={{ fontSize: '28px' }}></span>
+          <h3 style={{ fontSize: '22px', fontWeight: 'bold', color: '#007bff', margin: 0  }}></h3>
         </div>
         
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '30px 0' }}>
-          <div style={{
-            position: 'relative',
-            width: '200px',
-            height: '200px',
-            borderRadius: '50%',
-            border: '8px solid #e9ecef',
-            boxShadow: 'inset 0 0 20px rgba(0,0,0,0.1)',
-            background: 'linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%)'
-          }}>
-            {/* Angka jam */}
-            {[12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((num, i) => {
-              const angle = (i * 30 - 90) * (Math.PI / 180);
-              const x = Math.cos(angle) * 70;
-              const y = Math.sin(angle) * 70;
-              return (
-                <div
-                  key={num}
-                  style={{
-                    position: 'absolute',
-                    fontSize: '14px',
-                    fontWeight: 'bold',
-                    color: '#333',
-                    transform: `translate(${x}px, ${y}px)`,
-                    left: '50%',
-                    top: '50%',
-                    marginLeft: '-7px',
-                    marginTop: '-10px'
-                  }}
-                >
-                  {num}
-                </div>
-              );
-            })}
-            
-            {/* Titik tengah */}
-            <div style={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              width: '12px',
-              height: '12px',
-              backgroundColor: '#dc3545',
-              borderRadius: '50%',
-              transform: 'translate(-50%, -50%)',
-              zIndex: 10
-            }}></div>
-            
-            {/* Jarum jam */}
-            <div style={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              width: '6px',
-              height: '50px',
-              backgroundColor: '#212529',
-              borderRadius: '3px',
-              transformOrigin: 'bottom center',
-              transform: `translate(-50%, -100%) rotate(${hourAngle}deg)`
-            }}></div>
-            
-            {/* Jarum menit */}
-            <div style={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              width: '4px',
-              height: '70px',
-              backgroundColor: '#007bff',
-              borderRadius: '2px',
-              transformOrigin: 'bottom center',
-              transform: `translate(-50%, -100%) rotate(${minuteAngle}deg)`
-            }}></div>
-          </div>
-        </div>
+        {/* Panggil LiveClock di sini */}
+        <LiveClock />
         
         <div style={{ textAlign: 'center', marginTop: '10px', }}>
           <p style={{ fontSize: '25px', fontWeight: 'bold', color: '#28a745', margin: '5px 0' }}>14:00 - 17:30</p>
-          <p style={{ color: '#666', fontSize: '16px', margin: 0 }}>WIB</p>
         </div>
       </div>
 
@@ -237,8 +323,8 @@ const MeetingInfoInteractive = () => {
         minWidth: '280px'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
-          <span style={{ fontSize: '28px' }}>📍</span>
-          <h3 style={{ fontSize: '22px', fontWeight: 'bold', color: '#007bff', margin: 0  }}>Lokasi Presentasi</h3>
+          <span style={{ fontSize: '28px' }}></span>
+          <h3 style={{ fontSize: '22px', fontWeight: 'bold', color: '#007bff', margin: 0  }}></h3>
         </div>
         
         <div style={{ 
@@ -251,7 +337,7 @@ const MeetingInfoInteractive = () => {
           <div style={{
             width: '140px',
             height: '140px',
-            background: 'linear-gradient(135deg, #007bff 0%, #6f42c1 100%)',
+            background: 'linear-gradient(135deg, #007bff 0%, #19e2e9ff 100%)',
             borderRadius: '20px',
             display: 'flex',
             alignItems: 'center',
@@ -260,17 +346,20 @@ const MeetingInfoInteractive = () => {
             transform: 'scale(1)',
             transition: 'transform 0.3s ease'
           }}
-         // onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-         // onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
           >
-            <svg width="80" height="80" viewBox="0 0 24 24" fill="white">
-              <path d="M17.5 14.33C16.67 13.5 15.67 13 14.5 13h-5c-1.17 0-2.17.5-3 1.33V6h11v8.33zM19 4H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-7 7c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3z"/>
-            </svg>
+            <img 
+                src="icon-kelompok2.png" 
+                alt="UNSIA" 
+                width="80" 
+                height="80" 
+                style={{ fill: 'white' }} 
+              />
           </div>
           
-          <div style={{ textAlign: 'center', marginTop: '20px' }}>
-            <p style={{ fontSize: '20px', fontWeight: 'bold', color: '#212529', marginBottom: '8px' }}></p>
-            
+          <div style={{ textAlign: 'left', marginTop: '10px' }}>
+            <p style={{ fontSize: '20px', fontWeight: '', color: '#212529', marginBottom: '8px' }}>Meeting ID: 824 2759 1354</p>
+            <p style={{ fontSize: '20px', fontWeight: '', color: '#212529', marginBottom: '8px' }}>Passcode  : 1zieNp</p>
+    
             <a 
               href={zoomLink}
               target="_blank"
@@ -295,7 +384,7 @@ const MeetingInfoInteractive = () => {
                 e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,123,255,0.3)';
               }}
             >
-              🎥 Gabung Zoom Meeting
+              Gabung Zoom Meeting
             </a>
           </div>
         </div>
@@ -389,10 +478,10 @@ color: "white",
 const sectionContentStyle = {
 maxWidth: "1200px",
 margin: "30px auto",
-padding: "20px",
+//padding: "20px",
 borderRadius: "12px",
-backgroundColor: "rgba(255, 255, 255, 0.95)",
-boxShadow: "0 8px 16px rgba(0,0,0,0.2)",
+//backgroundColor: "rgba(255, 255, 255, 0.95)",
+//boxShadow: "0 8px 16px rgba(0,0,0,0.2)",
 };
 
 return (
@@ -424,34 +513,55 @@ Topik ini mengarah pada pembahasan tentang bagaimana nilai-nilai kerukunan umat 
 <button
 onClick={togglePlay} 
 style={{
-display: "inline-block",
-marginTop: "25px",
-padding: "10px 25px",
-backgroundColor: isPlaying ? "#f32e07ff" : "#062ef4ff", 
-color: "white",
-border: "none",
-borderRadius: "50px",
-fontWeight: "bold",
-cursor: "pointer",
-fontSize: "1.2em",
-transition: "background-color 0.3s ease",
-}}
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: "18px",
+        padding: "15px", // Padding lebih besar agar ikon di tengah
+        width: "60px", 
+        height: "60px",
+        backgroundColor: isPlaying ? "#f32e07ff" : "#062ef4ff", // Merah saat Pause, Biru saat Play
+        color: "white",
+        border: "2px solid white", // Garis putih tebal
+        borderRadius: "50%", // Membuat tombol lingkaran sempurna
+        fontWeight: "bold",
+        cursor: "pointer",
+        fontSize: "2em",
+        transition: "background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease",
+        margin: "25px auto 0 auto", // Tengah
+        boxShadow: "0 6px 15px rgba(0,0,0,0.4)"
+    }}
+    onMouseEnter={(e) => {
+        e.currentTarget.style.transform = 'scale(0.9)';
+    }}
+    onMouseLeave={(e) => {
+        e.currentTarget.style.transform = 'scale(0.8)';
+    }}
 >
-{isPlaying ? "Pause" : "Play Music"}
+    {/* Ikon Play (▶️) atau Pause (⏸️) */}
+    {isPlaying ? (
+        // Ikon Pause (Dua garis vertikal)
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+        </svg>
+    ) : (
+        // Ikon Play (Segitiga ke kanan)
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+            <path d="M8 5v14l11-7z"/>
+        </svg>
+    )}
 </button>
+
 </header>
 
 {/* SECTION 2: DETAIL LOGISTIK - VERSI INTERAKTIF */}
 <section style={sectionContentStyle}>
-<h2 style={{ textAlign: "center", color: "#01070eff", marginBottom: "10px" }}>INFORMASI PRESENTASI</h2>
-
 {/* Komponen Interaktif dengan Kalender & Jam Analog */}
 <MeetingInfoInteractive />
 </section>
 
 {/* SECTION 3: TEAM & INTERACTIVE PROFILES */}
 <section style={sectionContentStyle}>
-<h3 style={{ textAlign: "center", margin: 0,  color: "#007bff" }}>ANGGOTA KELOMPOK 2</h3>
 <div
 style={{
 display: "flex",
@@ -487,9 +597,6 @@ padding: "0 20px",
 
 {/* 🚀 EMBED SLIDE PRESENTASI */}
 <div style={{ margin: "40px 0 30px 0" }}>
-<h3 style={{ marginBottom: "15px", color: "#66aaff" }}>
-SLIDE
-</h3>
 <div
 style={{
 position: "relative",
@@ -520,9 +627,6 @@ border: "2px solid #007bff",
 
 {/* 📄 EMBED ARTIKEL LENGKAP */}
 <div style={{ margin: "40px 0 30px 0" }}>
-<h3 style={{ marginBottom: "15px", color: "#66aaff" }}>
-ARTIKEL
-</h3>
 <div
 style={{
 position: "relative",

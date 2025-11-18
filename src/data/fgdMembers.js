@@ -93,17 +93,18 @@ export const members = [
     agama: "",
     wa: "",
   },
-  {
+  */{
     id: 9,
     name: "MUHAMMAD DAFFA ADSYA ALFAWAZI",
     role: "Pembahasan: Faktor yang Mempengaruhi",
-    nim: "",
+    nim: "240101010013",
     kelas: "SI303",
-    domisili: "",
-    agama: "",
-    wa: "",
+    domisili: "Parung Panjang",
+    agama: "Islam",
+    wa: "0822 6939 4785",
+    imagePlaceholder:"dafa.jpeg",
   },
-  */{
+  {
     id: 10,
     name: "MUHAMMAD HABIBI PRISA",
     role: "Pembahasan: Tantangan dan Hambatan",

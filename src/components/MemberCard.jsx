@@ -117,15 +117,6 @@ const MemberCard = ({ member }) => {
     marginTop: "1px", // Jarak dari nama
   };
 
-  // Gaya untuk teks klik saja (agar warnanya berbeda)
-  const clickTextStyle = {
-    color: "#007bff",
-    fontWeight: "bold",
-    cursor: "pointer",
-    textDecoration: "underline",
-    marginLeft: "10px",
-    flexShrink: 0 // Pastikan teks ini tidak menciut
-  };
 
   // Fungsi untuk handle klik pada kartu
   const handleCardClick = (e) => {
