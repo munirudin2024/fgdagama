@@ -137,17 +137,17 @@ export const members = [
     agama: "",
     wa: "",
   },
-  {
+  */{
     id: 13,
     name: "MISBACHUL MUNIR",
     role: "Studi Kasus Negatif",
     nim: "",
-    kelas: "SI303",
+    kelas: "",
     domisili: "",
     agama: "",
     wa: "",
   },
-  */{
+  {
     id: 14,
     name: "MUHAMMAD MUNIRUDIN",
     role: "Penutup",
