@@ -29,7 +29,7 @@ export const members = [
     domisili: "JAKARTA",
     agama: "Islam",
     wa: "081 252 262 124",
-    imagePlaceholder:"black.png",
+    imagePlaceholder:"lkm.jpeg",
   },
   {
     id: 3,
