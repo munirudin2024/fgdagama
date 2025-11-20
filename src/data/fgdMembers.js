@@ -23,13 +23,13 @@ export const members = [
  {
     id: 2,
     name: "MOHAMAD LUKMAN PRASANTO KARIM",
-    role: "Penutup",
+    role: "Hakikat dan Nilai “Rukun”",
     nim: "240101010009",
     kelas: "SI303",
     domisili: "JAKARTA",
     agama: "Islam",
     wa: "081 252 262 124",
-    imagePlaceholder:"icon-kelompok2.png",
+    imagePlaceholder:"black.png",
   },
   {
     id: 3,
@@ -42,17 +42,19 @@ export const members = [
     wa: "0813 8986 1274",
     imagePlaceholder:"novi.jpeg", 
   },
-   /*{
+   {
     id: 4,
     name: "M. ARDA DWI JANUAR",
     role: "Kajian Teori: Landasan Normatif",
     nim: "",
-    kelas: "SI303",
+    kelas: "",
     domisili: "",
     agama: "",
     wa: "",
+    imagePlaceholder:"black.png",
+
   },
-  */{
+  {
     id: 5,
     name: "JIHAN LESTARI",
     role: "Pembahasan: Konteks Individu & Lokal",
@@ -74,17 +76,19 @@ export const members = [
     wa: "+62895361194471",
     imagePlaceholder:"nirmala.jpg",
   },
-  /*{
+  {
     id: 7,
     name: "MOHAMMAD BAGUS ANDIN PRAKOSO",
     role: "Pembahasan: Konteks Digital & Hukum",
     nim: "",
-    kelas: "SI303",
+    kelas: "",
     domisili: "",
     agama: "",
     wa: "",
+    imagePlaceholder:"black.png",
+
   },
-*/{
+{
     id: 8,
     name: "MUHAMMAD IRFAN MAULANA",
     role: "Pembahasan: Pentingnya Kerukunan",
@@ -150,7 +154,7 @@ export const members = [
     domisili: "",
     agama: "",
     wa: "",
-    imagePlaceholder:"icon-kelompok2.png",
+    imagePlaceholder:"black.png",
   },
   {
     id: 14,

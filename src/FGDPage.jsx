@@ -6,8 +6,8 @@ const BACKGROUND_IMAGE_URL =
 "https://unsia.ac.id/wp-content/uploads/2023/10/pic10.jpg";
 
 const YOUTUBE_VIDEO_ID = "_VfAP45O3_w"; // Video Record Presentasi
-//const BGM_YOUTUBE_ID = "WhqEGF5LoDk";//pop
-const BGM_YOUTUBE_ID = "gKmd_iOGNVI"; //religi (BGM)
+const BGM_YOUTUBE_ID = "WhqEGF5LoDk";//pop
+//const BGM_YOUTUBE_ID = "gKmd_iOGNVI"; //religi (BGM)
 const BGM_PLAYER_ID = "bgm-youtube-player";
 
 const SLIDE_EMBED_URL = "https://www.canva.com/design/DAG5C5euF0w/JuN1NaQaTE7nt2vBgCcr6g/edit?utm_content=DAG5C5euF0w&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"; 
@@ -153,7 +153,7 @@ const MeetingInfoInteractive = () => {
   const isCurrentMonthYear = currentMonth === meetingMonth && currentYear === meetingYear;
   
   // Link Zoom - GANTI DENGAN LINK ZOOM ANDA
-  const zoomLink = "https://us05web.zoom.us/j/82427591354?pwd=r15NWdZXn61BYW1Nb8YArreaGadQoP.1";
+  const zoomLink = "";
 
   // Generate calendar untuk November 2025
   const getDaysInMonth = (month, year) => {
@@ -312,7 +312,7 @@ const MeetingInfoInteractive = () => {
                 textDecoration: 'none',
                 boxShadow: '0 4px 12px rgba(0,123,255,0.3)',
                 transition: 'transform 0.2s ease, box-shadow 0.2s ease',
-              }}>14:00 - 17:30</p>
+              }}>15:30 - 17:30</p>
         </div>
       </div>
 
@@ -356,8 +356,8 @@ const MeetingInfoInteractive = () => {
           </div>
           
           <div style={{ textAlign: 'left', marginTop: '10px' }}>
-            <p style={{ fontSize: '20px', fontWeight: '', color: '#212529', marginBottom: '8px' }}>Meeting ID: 824 2759 1354</p>
-            <p style={{ fontSize: '20px', fontWeight: '', color: '#212529', marginBottom: '8px' }}>Passcode  : 1zieNp</p>
+            <p style={{ fontSize: '20px', fontWeight: '', color: '#212529', marginBottom: '8px' }}>ID:</p>
+            <p style={{ fontSize: '20px', fontWeight: '', color: '#212529', marginBottom: '8px' }}>passcode:</p>
     
             <a 
               href={zoomLink}
