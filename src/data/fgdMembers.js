@@ -79,13 +79,13 @@ export const members = [
   {
     id: 7,
     name: "MOHAMMAD BAGUS ANDIN PRAKOSO",
-    role: "Pembahasan: Konteks Digital & Hukum",
-    nim: "",
-    kelas: "",
-    domisili: "",
-    agama: "",
-    wa: "",
-    imagePlaceholder:"black.png",
+    role: "Pembahasan: Konteks Digital dan Kebangsaan & Hukum",
+    nim: "240101010123",
+    kelas: "SI303",
+    domisili: "Jakarta",
+    agama: "Islam",
+    wa: "0813 3032 7870",
+    imagePlaceholder:"bgs.jpg",
 
   },
 {
