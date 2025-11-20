@@ -10,7 +10,7 @@ const BGM_YOUTUBE_ID = "WhqEGF5LoDk";//pop
 //const BGM_YOUTUBE_ID = "gKmd_iOGNVI"; //religi (BGM)
 const BGM_PLAYER_ID = "bgm-youtube-player";
 
-const SLIDE_EMBED_URL = "https://docs.google.com/presentation/d/1yyYywV0y3Le0_zQnHrWglACl1Z7mIr1l/edit?usp=drive_link&ouid=101195429996281074479&rtpof=true&sd=true"; 
+//const SLIDE_EMBED_URL = "https://www.canva.com/design/DAG5C5euF0w/HbEzDBqMGb0QkfjvnndVWA/view"; 
 const ARTIKEL_EMBED_URL = "https://docs.google.com/document/d/17EdMmsnIo_dvue0GOgu1-xo5dyGXHGZZbyTpx-Je9vI/edit?usp=sharing"; 
 const ARTIKEL_LINK_DOWNLOAD = "https://docs.google.com/document/d/17EdMmsnIo_dvue0GOgu1-xo5dyGXHGZZbyTpx-Je9vI/edit?usp=sharing"; 
 
@@ -392,7 +392,7 @@ const MeetingInfoInteractive = () => {
   );
 };
 
-// ===== KOMPONEN UTAMA FGD PAGE =====
+// ===== KOMPONEN UTAMA FGD PAGE (HANYA BAGIAN INI YANG PERLU DIGANTI) =====
 const FGDPage = () => {
 // 1. STATE UNTUK STATUS PEMUTARAN
 const [isPlaying, setIsPlaying] = useState(false);
@@ -401,55 +401,61 @@ const playerRef = useRef(null);
 
 // Fungsi untuk memuat YouTube Iframe API dan membuat objek pemain
 useEffect(() => {
-// Memastikan skrip YouTube API dimuat
-if (!window.YT) {
-const tag = document.createElement("script");
-tag.src = "https://www.youtube.com/iframe_api";
-const firstScriptTag = document.getElementsByTagName("script")[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-}
+    // Memastikan skrip YouTube API dimuat
+    if (!window.YT) {
+        const tag = document.createElement("script");
+        tag.src = "https://www.youtube.com/iframe_api";
+        const firstScriptTag = document.getElementsByTagName("script")[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    }
 
-// Fungsi yang akan dipanggil ketika YouTube API siap
-window.onYouTubeIframeAPIReady = () => {
-// Membuat objek pemain YouTube
-playerRef.current = new window.YT.Player(BGM_PLAYER_ID, {
-videoId: BGM_YOUTUBE_ID,
-playerVars: {
-autoplay: 0, 
-loop: 1, 
-playlist: BGM_YOUTUBE_ID, 
-controls: 0, 
-showinfo: 0,
-rel: 0,
-modestbranding: 1,
-},
-events: {
-onReady: (event) => {
-// ...
-},
-},
-});
-};
-// Cleanup function
-return () => {
-if (playerRef.current) {
-playerRef.current.destroy();
-}
-};
+    // Fungsi yang akan dipanggil ketika YouTube API siap
+    window.onYouTubeIframeAPIReady = () => {
+        // Membuat objek pemain YouTube
+        playerRef.current = new window.YT.Player(BGM_PLAYER_ID, {
+            videoId: BGM_YOUTUBE_ID,
+            playerVars: {
+                autoplay: 0, 
+                loop: 1, 
+                playlist: BGM_YOUTUBE_ID, 
+                controls: 0, 
+                showinfo: 0,
+                rel: 0,
+                modestbranding: 1,
+            },
+            events: {
+                onReady: () => {
+                    // Cek di konsol jika Player berhasil dibuat
+                    console.log("YouTube Player BGM berhasil dimuat."); 
+                },
+            },
+        });
+    };
+    
+    // Cleanup function
+    return () => {
+        if (playerRef.current) {
+            playerRef.current.destroy();
+        }
+    };
 }, []); 
 
 // Fungsi untuk menangani pemutaran/jeda musik
 const togglePlay = () => {
-if (playerRef.current && window.YT) {
-const isCurrentlyPlaying = playerRef.current.getPlayerState() === window.YT.PlayerState.PLAYING;
-if (isCurrentlyPlaying || isPlaying) {
-playerRef.current.pauseVideo();
-setIsPlaying(false);
-} else {
-playerRef.current.playVideo();
-setIsPlaying(true);
-}
-}
+    if (playerRef.current && window.YT) {
+        const isCurrentlyPlaying = playerRef.current.getPlayerState() === window.YT.PlayerState.PLAYING;
+        if (isCurrentlyPlaying || isPlaying) {
+            playerRef.current.pauseVideo();
+            setIsPlaying(false);
+        } else {
+            // Catatan: Browser modern mungkin butuh interaksi pengguna dulu.
+            playerRef.current.playVideo();
+            setIsPlaying(true);
+        }
+    } else {
+        // Pesan jika diklik sebelum Player siap
+        console.error("YouTube Player belum siap. Coba refresh halaman.");
+    }
 };
 
 // Gaya untuk container utama
@@ -574,7 +580,7 @@ Topik ini mengarah pada pembahasan tentang bagaimana nilai-nilai kerukunan umat 
 <h3 
               style={{
                 display: 'inline-block',
-                background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.65))',
+                background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.86))',
                 color: 'white',
                 padding: '12px 24px',
                 borderRadius: '8px',
@@ -613,9 +619,8 @@ style={{
 }}
 >
 
-{/* 📹 EMBED VIDEO YOUTUBE (Recording) */}
-{/*  
-<div style={{ margin: "40px 0 30px 0" }}>
+{/* 📹 EMBED VIDEO YOUTUBE (Recording) - DITUTUP */}
+{/* <div style={{ margin: "40px 0 30px 0" }}>
     <h3 style={{ marginBottom: "15px", color: "#ff4500" }}>
     </h3>
     <div
@@ -645,10 +650,10 @@ style={{
             }}
         ></iframe>
     </div>
-</div>
-*/}
+</div> */}
 
-{/* 🚀 EMBED SLIDE PRESENTASI */}
+{/* 🚀 EMBED SLIDE PRESENTASI - DITUTUP */}
+{/*
 <div style={{ margin: "40px 0 30px 0" }}>
 <h3 style={{ marginBottom: "15px", color: "#66aaff" }}>
 </h3>
@@ -679,10 +684,13 @@ border: "2px solid #007bff",
 ></iframe>
 </div>
 </div>
+*/}
 
-{/* 📄 EMBED ARTIKEL LENGKAP */}
-<div style={{ margin: "40px 0 30px 0" }}>
-<h3 style={{ marginBottom: "15px", color: "#66aaff" }}>
+{/* 📄 EMBED ARTIKEL LENGKAP - KINI HANYA TERSISA TOMBOL DOWNLOAD */}
+<div style={{ margin: "40px 0 30px 0" }}> {/* <-- DIV ARTIKEL WRAPPER (Aktif) */}
+
+{/* Blok IFRAME dan Judul ARTIKEL DIKOMENTARI (Disembunyikan) */}
+{/* <h3 style={{ marginBottom: "15px", color: "#66aaff" }}>
 </h3>
 <div
 style={{
@@ -710,8 +718,11 @@ border: "2px solid #28a745",
 }}
 ></iframe>
 </div>
+*/} 
+{/* <-- Penutup komentar hanya di sini */}
 
-{/* Tautan Unduh opsional */}
+
+{/* Tautan Unduh opsional (TETAP AKTIF/DITAMPILKAN) */}
 <p style={{ margin: "25px 0 10px 0", fontSize: "1em", fontWeight: "bold", color: "white" }}>
 </p>
 <a
@@ -720,7 +731,7 @@ target="_blank"
 rel="noopener noreferrer"
               style={{
                 display: 'inline-block',
-                background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.65))',
+                background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.94))',
                 color: 'white',
                 padding: '12px 24px',
                 borderRadius: '8px',
@@ -732,10 +743,10 @@ rel="noopener noreferrer"
 >
 download artkel
 </a>
-</div>
-</div>
+</div> 
+</div> 
 </section>
-</div>
+</div> 
 );
 };
 
