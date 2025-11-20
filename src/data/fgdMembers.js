@@ -159,7 +159,7 @@ export const members = [
   {
     id: 14,
     name: "MUHAMMAD MUNIRUDIN",
-    role: "Penutup",
+    role: "Penutup : kesimpulan & saran",
     nim: "2301010183",
     kelas: "SI303",
     domisili: "Demak",

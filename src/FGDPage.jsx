@@ -10,7 +10,7 @@ const BGM_YOUTUBE_ID = "WhqEGF5LoDk";//pop
 //const BGM_YOUTUBE_ID = "gKmd_iOGNVI"; //religi (BGM)
 const BGM_PLAYER_ID = "bgm-youtube-player";
 
-const SLIDE_EMBED_URL = "https://www.canva.com/design/DAG5C5euF0w/JuN1NaQaTE7nt2vBgCcr6g/edit?utm_content=DAG5C5euF0w&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"; 
+const SLIDE_EMBED_URL = "https://docs.google.com/presentation/d/1yyYywV0y3Le0_zQnHrWglACl1Z7mIr1l/edit"; 
 const ARTIKEL_EMBED_URL = "https://docs.google.com/document/d/17EdMmsnIo_dvue0GOgu1-xo5dyGXHGZZbyTpx-Je9vI/edit?usp=sharing"; 
 const ARTIKEL_LINK_DOWNLOAD = "https://docs.google.com/document/d/17EdMmsnIo_dvue0GOgu1-xo5dyGXHGZZbyTpx-Je9vI/edit?usp=sharing"; 
 
