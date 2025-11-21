@@ -6,8 +6,10 @@ const BACKGROUND_IMAGE_URL =
 "https://unsia.ac.id/wp-content/uploads/2023/10/pic10.jpg";
 
 const YOUTUBE_VIDEO_ID = "_VfAP45O3_w"; // Video Record Presentasi
-const BGM_YOUTUBE_ID = "WhqEGF5LoDk";//pop
+//const BGM_YOUTUBE_ID = "WhqEGF5LoDk";//pop/T2QZpy07j4s&t=88s
 //const BGM_YOUTUBE_ID = "gKmd_iOGNVI"; //religi (BGM)
+const BGM_YOUTUBE_ID = "etsq_he79Y4";
+
 const BGM_PLAYER_ID = "bgm-youtube-player";
 
 //const SLIDE_EMBED_URL = "https://www.canva.com/design/DAG5C5euF0w/HbEzDBqMGb0QkfjvnndVWA/view"; 
@@ -392,7 +394,7 @@ const MeetingInfoInteractive = () => {
   );
 };
 
-// ===== KOMPONEN UTAMA FGD PAGE (HANYA BAGIAN INI YANG PERLU DIGANTI) =====
+// ===== KOMPONEN UTAMA FGD PAGE (KODE YANG TELAH DIMODIFIKASI) =====
 const FGDPage = () => {
 // 1. STATE UNTUK STATUS PEMUTARAN
 const [isPlaying, setIsPlaying] = useState(false);
@@ -424,8 +426,9 @@ useEffect(() => {
                 modestbranding: 1,
             },
             events: {
-                onReady: () => {
-                    // Cek di konsol jika Player berhasil dibuat
+                onReady: (event) => {
+                    // Mute segera setelah siap, karena isMuted = true (Diasumsikan mulai mute)
+                    event.target.mute(); 
                     console.log("YouTube Player BGM berhasil dimuat."); 
                 },
             },
@@ -448,7 +451,9 @@ const togglePlay = () => {
             playerRef.current.pauseVideo();
             setIsPlaying(false);
         } else {
-            // Catatan: Browser modern mungkin butuh interaksi pengguna dulu.
+            // Auto-unmute dan set volume saat play
+            playerRef.current.unMute();
+            playerRef.current.setVolume(100); 
             playerRef.current.playVideo();
             setIsPlaying(true);
         }
@@ -457,6 +462,7 @@ const togglePlay = () => {
         console.error("YouTube Player belum siap. Coba refresh halaman.");
     }
 };
+
 
 // Gaya untuk container utama
 const mainContainerStyle = {
@@ -483,17 +489,14 @@ color: "white",
 const sectionContentStyle = {
 maxWidth: "1200px",
 margin: "30px auto",
-padding: "20px", // Tambahkan padding lagi agar kalender/jam tidak terlalu mepet
+padding: "20px", 
 borderRadius: "12px",
-//backgroundColor: "rgba(255, 255, 255, 0.95)",
-//boxShadow: "0 8px 16px rgba(0,0,0,0.2)",
 };
 
 // Gaya khusus untuk konten yang ingin Full Width
 const fullWidthSectionStyle = {
     textAlign: "center",
     padding: "40px 0",
-    //backgroundColor: "rgba(52, 58, 64, 0.9)",
     color: "white",
 };
 
@@ -515,7 +518,9 @@ overflow: 'hidden'
 
 {/* SECTION 1: HEADER & JUDUL FGD */}
 <header style={headerStyle}>
-<h3 style={{ margin: 0}}>KELOMPOK 2 PENDIDIKAN AGAMA</h3>
+<h3 style={{ margin: 0}}>KELOMPOK 2</h3>
+<h3 style={{ margin: 0}}>SI303</h3>
+<h3 style={{ margin: 0}}>PENDIDIKAN AGAMA</h3>
 <h1 style={{ margin: "5px 0 10px 0", fontSize: "3em" }}>
 Konsep Kerukunan Umat Beragama dan Implementasinya dalam Multi Konteks
 </h1>
@@ -523,49 +528,7 @@ Konsep Kerukunan Umat Beragama dan Implementasinya dalam Multi Konteks
 Topik ini mengarah pada pembahasan tentang bagaimana nilai-nilai kerukunan umat beragama dipahami, diterapkan, dan dikembangkan dalam berbagai bidang kehidupan di Indonesia sebagai upaya memperkuat toleransi, moderasi beragama, dan persatuan nasional.
 </p>
 
-{/* Call to Action Utama (Tombol Play/Pause BARU) */}
-
-<button
-    onClick={togglePlay} 
-    style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        marginTop: "18px",
-        padding: "15px", // Padding lebih besar agar ikon di tengah
-        width: "60px", 
-        height: "60px",
-        backgroundColor: isPlaying ? "#f32e07ff" : "#062ef4ff", // Merah saat Pause, Biru saat Play
-        color: "white",
-        border: "2px solid white", // Garis putih tebal
-        borderRadius: "50%", // Membuat tombol lingkaran sempurna
-        fontWeight: "bold",
-        cursor: "pointer",
-        fontSize: "2em",
-        transition: "background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease",
-        margin: "25px auto 0 auto", // Tengah
-        boxShadow: "0 6px 15px rgba(0,0,0,0.4)"
-    }}
-    onMouseEnter={(e) => {
-        e.currentTarget.style.transform = 'scale(1.1)'; // Efek hover
-    }}
-    onMouseLeave={(e) => {
-        e.currentTarget.style.transform = 'scale(1)';
-    }}
->
-    {/* Ikon Play (▶️) atau Pause (⏸️) */}
-    {isPlaying ? (
-        // Ikon Pause (Dua garis vertikal)
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
-            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
-        </svg>
-    ) : (
-        // Ikon Play (Segitiga ke kanan)
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
-            <path d="M8 5v14l11-7z"/>
-        </svg>
-    )}
-</button>
+{/* CATATAN: Tombol Play/Pause telah dipindahkan ke bawah dan dibuat fixed. */}
 
 </header>
 
@@ -618,6 +581,7 @@ style={{
     padding: "0 20px", // Tambahkan padding horizontal agar tidak menempel di tepi HP
 }}
 >
+
 
 {/* 📹 EMBED VIDEO YOUTUBE (Recording) - DITUTUP */}
 {/* <div style={{ margin: "40px 0 30px 0" }}>
@@ -741,11 +705,65 @@ rel="noopener noreferrer"
                 transition: 'transform 0.2s ease, box-shadow 0.2s ease',
               }}
 >
-download artkel
+download artikel
 </a>
 </div> 
 </div> 
 </section>
+
+{/* 🎶 TOMBOL PLAY/PAUSE FIXED (Posisi tetap - TENGAH BAWAH) */}
+<button
+    onClick={togglePlay} 
+    style={{
+        position: 'fixed', // Kunci utama: Menetapkan posisi relatif terhadap viewport
+        bottom: '5px',    // Jarak dari bawah layar
+        //right: '30px',     // Jarak dari kanan layar
+        
+        // --- PERBAIKAN CENTERING ---
+        left: '50%', // Atur 50% dari kiri
+        transform: 'translateX(-50%)', // Geser kembali 50% dari lebar tombol (Kunci centering)
+        // ---------------------------
+        
+        zIndex: 999,       // Pastikan tombol selalu di atas konten lain
+        
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "5px", // jarak logo dg tombol
+        width: "30px", //lebar tombol
+        height: "30px",// tinggi tombol
+        backgroundColor: isPlaying ? "#f32e07ff" : "#062ef4ff", // Merah saat Pause, Biru saat Play
+        color: "white",
+        border: "2px solid white", 
+        borderRadius: "50%", //lingkaran (karena width=height)
+        fontWeight: "bold",
+        cursor: "pointer",
+        // fontSize: "2em", // Dihapus karena ukuran diatur oleh SVG
+        transition: "background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease",
+        boxShadow: "0 6px 15px rgba(0,0,0,0.4)"
+    }}
+    onMouseEnter={(e) => {
+        // Transform perlu menyertakan translateX(-50%) saat hover agar centering tidak hilang
+        e.currentTarget.style.transform = 'translateX(-50%) scale(1.1)'; 
+    }}
+    onMouseLeave={(e) => {
+        e.currentTarget.style.transform = 'translateX(-50%) scale(1)';
+    }}
+>
+    {/* Ikon Play (▶️) atau Pause (⏸️) - UKURAN DISESUAIKAN (30x30) agar pas di tombol 40x40 */}
+    {isPlaying ? (
+        // Ikon Pause (Dua garis vertikal)
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="white">
+            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+        </svg>
+    ) : (
+        // Ikon Play (Segitiga ke kanan)
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="white">
+            <path d="M8 5v14l11-7z"/>
+        </svg>
+    )}
+</button>
+
 </div> 
 );
 };

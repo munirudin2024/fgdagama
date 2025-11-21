@@ -46,12 +46,12 @@ export const members = [
     id: 4,
     name: "M. ARDA DWI JANUAR",
     role: "Kajian Teori: Landasan Normatif",
-    nim: "",
-    kelas: "",
-    domisili: "",
-    agama: "",
-    wa: "",
-    imagePlaceholder:"black.png",
+    nim: "240101010058",
+    kelas: "SI303",
+    domisili: "BOGOR",
+    agama: "Islam",
+    wa: "085 163 713 912",
+    imagePlaceholder:"ard.jpg",
 
   },
   {
