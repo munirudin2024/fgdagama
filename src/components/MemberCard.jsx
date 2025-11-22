@@ -1,126 +1,140 @@
+// File: src/components/MemberCard.jsx (Kode yang disinkronkan)
+
 import React, { useState } from "react";
+
+// Placeholder jika member.imagePlaceholder tidak ada
+const DEFAULT_PLACEHOLDER = "https://via.placeholder.com/150x150?text=Anggota";
 
 const MemberCard = ({ member }) => {
   const [showDetails, setShowDetails] = useState(false);
+  const imageUrl = member.imagePlaceholder || DEFAULT_PLACEHOLDER;
 
   // Gaya untuk kartu secara keseluruhan
   const cardStyle = {
-    // Ukuran dasar kartu
-    width: "240px",
+    width: "360px", // Tetap 250px
     margin: "15px",
-    borderRadius: "10px",
+    borderRadius: "15px",
     overflow: "hidden",
-    boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+    boxShadow: "0 8px 25px rgba(0,0,0,0.15)",
     transition: "transform 0.3s ease, box-shadow 0.3s ease",
     cursor: "pointer",
     position: "relative",
-    backgroundColor: "#fff",
+    backgroundColor: "#f7f7f7",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-between",
+    border: '1px solid #ddd',
   };
 
-  // Gaya untuk container foto background
+  // Gaya untuk container foto background (Latar belakang)
   const backgroundPhotoStyle = {
-    backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url(${member.imagePlaceholder})`,
+    backgroundImage: `linear-gradient(135deg, rgba(52, 58, 64, 0.6), rgba(33, 37, 41, 0.7)), url(${imageUrl})`,
     backgroundSize: "cover",
     backgroundPosition: "center",
-    height: showDetails ? "80px" : "150px", // Tinggi berubah saat detail muncul
+    height: showDetails ? "90px" : "170px",
     display: "flex",
-    alignItems: "center",
+    alignItems: "flex-end",
     justifyContent: "center",
     color: "white",
-    padding: "10px",
+    padding: showDetails ? "10px" : "15px 10px",
     boxSizing: "border-box",
-    transition: "height 0.3s ease", // Animasi perubahan tinggi
+    transition: "height 0.4s ease-in-out", // OK: 0.4s
   };
 
-  // Gaya untuk teks nama di awal
+  // ... (Gaya initialTextStyle, nameInitialStyle, nimInitialStyle tetap sama)
   const initialTextStyle = {
+    textAlign: 'center',
+    width: '100%',
+    padding: '0 10px',
+  };
+  
+  const nameInitialStyle = {
     margin: 0,
-    fontSize: "0.1em",
+    fontSize: "0.8em", 
     fontWeight: "bold",
-    textShadow: "1px 1px 3px rgba(0,0,0,0.7)",
+    textShadow: "1px 1px 2px rgba(0,0,0,0.7)",
+  };
+
+  const nimInitialStyle = {
+    margin: '3px 0 0 0',
+    fontSize: "0.8em", 
+    opacity: 0.9,
+    fontWeight: 300,
   };
 
   // Gaya untuk foto profil bundar yang muncul saat detail
   const profileImageStyle = {
     borderRadius: "50%",
-    width: "100px",
-    height: "100px",
+    width: "110px", 
+    height: "110px",
     objectFit: "cover",
-    border: "4px solid white",
-    boxShadow: "0 4px 10px rgba(0,0,0,0.3)",
+    border: "4px solid #fff",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.4)",
     position: "absolute",
-    top: "0px",
-    left: `calc(50% - 50px)`,
     zIndex: 10,
+    // ⚠️ PERBAIKAN FOTO: Disamakan menjadi 0.4s
+    transition: "top 0.4s ease-in-out, opacity 0.4s ease-in-out", 
+
+    top: showDetails ? "15px" : "-100px", 
+    left: `calc(50% - 50px)`,
+    opacity: showDetails ? 1 : 0,
   };
 
   // Gaya untuk bagian konten utama kartu
   const contentStyle = {
-    // PENTING: Mengurangi padding di sini untuk memperkecil area putih
-    padding: "10px",
+    padding: showDetails ? "45px 20px 10px 20px" : "10px 20px 10px 20px", 
     textAlign: "center",
     flexGrow: 1,
+    transition: 'padding 0.4s ease-in-out', // OK: 0.4s
   };
 
   // Gaya untuk teks detail yang disembunyikan
   const detailsStyle = {
-    borderTop: "1px solid #eee",
-    paddingTop: "10px",
+    padding: "15px 0 0 0",
     marginTop: "15px",
     textAlign: "left",
-    fontSize: "13px",
-    color: "#333",
-    maxHeight: showDetails ? "200px" : "0", // Animasi buka/tutup detail
+    fontSize: "14px",
+    color: "#444",
+    maxHeight: showDetails ? "300px" : "0", 
     overflow: "hidden",
-    transition: "max-height 0.4s ease-in-out, opacity 0.4s ease-in-out",
     opacity: showDetails ? 1 : 0,
+    borderTop: showDetails ? "1px dashed #ced4da" : 'none', 
+    // ⚠️ PERBAIKAN DETAIL: max-height disamakan menjadi 0.4s
+    transition: "max-height 0.4s ease-in-out, opacity 0.4s ease-in-out, border-top 0.4s ease",
   };
 
-  // --- START: Gaya Flexbox untuk Penyejajaran Titik Dua ---
-  
-  // 1. Gaya untuk kontainer setiap baris (Membuat 2 kolom)
+  // ... (Gaya detailItemStyle, labelStyle, valueStyle, combinedInfoStyle tetap sama)
   const detailItemStyle = {
     display: "flex",
     margin: "5px 0",
-    lineHeight: "1.2", // Merapikan jarak antar baris
+    lineHeight: "1.3", 
   };
   
-  // 2. Gaya untuk kolom label/judul
   const labelStyle = {
-    fontWeight: "bold",
-    // 85px cukup untuk "Domisili" dan "Linkedin" + titik dua + spasi
+    fontWeight: "normal",
     width: "85px", 
-    flexShrink: 0, // Mencegah kolom ini menciut
+    flexShrink: 0, 
+    color: '#007bff', 
   };
   
-  // 3. Gaya untuk kolom nilai
   const valueStyle = {
-    flexGrow: 1, // Membiarkan nilai mengisi sisa ruang
+    flexGrow: 1, 
+    wordBreak: 'break-word', 
   }
 
-  // --- END: Gaya Flexbox untuk Penyejajaran Titik Dua ---
-
-  // Gaya baru untuk menggabungkan BAB dan Teks Klik
   const combinedInfoStyle = {
-    // Padding vertical minimal agar area putih kecil
-    padding: "1px 0",
-    fontSize: "12px",
-    color: "#555",
-    // Membuat teks BAB/Peran dan "Klik untuk Detail" menjadi satu baris
+    padding: "10px 0",
+    fontSize: "0.9em",
+    color: "#6c757d",
     display: "flex",
-    justifyContent: "space-between", // Memisahkan kedua teks
+    justifyContent: "center",
     alignItems: "center",
-    borderTop: "1px solid #eee", // Garis pemisah tipis
-    marginTop: "1px", // Jarak dari nama
+    borderTop: "1px solid #eee", 
+    marginTop: "15px", 
   };
 
 
   // Fungsi untuk handle klik pada kartu
   const handleCardClick = (e) => {
-    // Jika user mengklik link WA, jangan toggle detail
     if (e.target.tagName !== 'A') {
       setShowDetails(!showDetails);
     }
@@ -129,92 +143,92 @@ const MemberCard = ({ member }) => {
   return (
     <div
       style={cardStyle}
-      onClick={handleCardClick} // Menggunakan handler yang dimodifikasi
+      onClick={handleCardClick}
       onMouseEnter={(e) =>
-        (e.currentTarget.style.transform = "translateY(-5px)")
+        (e.currentTarget.style.transform = "translateY(-8px)")
       }
       onMouseLeave={(e) => (e.currentTarget.style.transform = "translateY(0)")}
     >
-      {/* Bagian Foto Latar / Profil */}
+      {/* 1. Bagian Foto Latar / Profil */}
       <div style={backgroundPhotoStyle}>
-        {/* Tampilan awal: Hanya Nama di atas gambar latar */}
+        {/* Tampilan awal: Nama dan NIM di atas gambar latar */}
         {!showDetails && (
-          <div style={{ padding: "10px", width: "100%" }}>
-            <p style={initialTextStyle}>{member.name}</p>
+          <div style={initialTextStyle}>
+            <p style={nameInitialStyle}>{member.name}</p>
+            <p style={nimInitialStyle}>{member.nim}</p>
           </div>
-        )}
-
-        {/* Tampilan saat detail muncul: Foto profil bundar */}
-        {showDetails && (
-          <img
-            src={member.imagePlaceholder}
-            //src={`${process.env.PUBLIC_URL}${member.imagePlaceholder}`}
-            alt={`Foto ${member.name}`}
-            style={profileImageStyle}
-          />
         )}
       </div>
 
-      {/* Bagian Konten Kartu */}
+      {/* Foto Profil Bundar */}
+      <img
+          src={imageUrl}
+          alt={`Foto ${member.name}`}
+          style={profileImageStyle}
+      />
+
+      {/* 2. Bagian Konten Kartu */}
       <div style={contentStyle}>
+        
+        {/* Teks Nama dan NIM saat detail terbuka */}
         {showDetails && (
-          // Teks Nama dan Peran saat detail terbuka
           <>
-            {/* Mengubah margin agar nama tampil di bawah foto profil yang muncul */}
-            <h4 style={{ margin: "30px 0 0 0", fontSize: "0.8em" }}>
+            <h4 style={{ margin: "2px 0", fontSize: "1em", fontWeight: '700' }}>
               {member.name}
             </h4>
             <p
-              style={{ color: "#555", fontSize: "0.5px", margin: "0 0 10px 0" }}
+              style={{ color: "#555", fontSize: "0.9em", margin: "0 0 10px 0" }}
             >
               {member.nim}
             </p>
           </>
         )}
 
-        {/* Detail Interaktif (Bagian yang Dirapikan) */}
+        {/* 3. Detail Interaktif */}
         <div style={detailsStyle}>
           
           {/* Item 1: Agama */}
           <div style={detailItemStyle}>
             <span style={labelStyle}>Agama</span>
-            <span style={valueStyle}>{member.agama}</span>
+            <span style={valueStyle}>: {member.agama}</span>
           </div>
           
           {/* Item 2: Domisili */}
           <div style={detailItemStyle}>
             <span style={labelStyle}>Domisili</span>
-            <span style={valueStyle}>{member.domisili}</span>
+            <span style={valueStyle}>: {member.domisili}</span>
           </div>
           
-          {/* Item 3: Email */}
+          {/* Item 3: Kelas */}
           <div style={detailItemStyle}>
             <span style={labelStyle}>Kelas</span>
-            <span style={valueStyle}>{member.kelas}</span>
+            <span style={valueStyle}>: {member.kelas}</span>
           </div>
           
-          {/* Item 4: Linkedin / WA Link */}
+          {/* Item 4: WA Link */}
           <div style={detailItemStyle}>
-            <span style={labelStyle}>Wa</span>
-            <a
-              href={`https://wa.me/${member.wa}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ color: "blue", textDecoration: "none" }}
-            >
-              {member.wa}
-            </a>
+            <span style={labelStyle}>WhatsApp</span>
+            <span style={valueStyle}>
+              : <a
+                href={`https://wa.me/${member.wa}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "#28a745", fontWeight: 'bold', textDecoration: "none" }}
+              >
+                {member.wa}
+              </a>
+            </span>
           </div>
         </div>
 
-        {/* Info Gabungan (BAB dan Klik Detail) - Hanya tampil saat detail tertutup */}
-        {!showDetails && (
-          <div style={combinedInfoStyle}>
+        {/* 4. Info Gabungan (Role dan Klik Detail) - Selalu tampil di bawah */}
+        <div style={combinedInfoStyle}>
             {/* Teks BAB I - Pendahuluan (Role) */}
-            <span style={{ fontWeight: '500' }}>{member.role}</span>
+            <span style={{ fontWeight: '600', color: '#343a40' }}>
+                {member.role}
+            </span>
             {/* Teks Klik untuk Detail */}
-          </div>
-        )}
+        </div>
       </div>
     </div>
   );

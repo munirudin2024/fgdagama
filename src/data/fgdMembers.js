@@ -1,10 +1,12 @@
 // /src/data/fgdMembers.js
 export const lecturer = {
   id: 0,
-  name: "Dr. [Nama Dosen]",
-  role: "Dosen Pembimbing/Peneliti Utama",
-  bio: "Pakar dalam bidang Sosiologi Agama dan Kebijakan Publik, Universitas [Nama Kampus].",
-  imagePlaceholder: "https://via.placeholder.com/150/0000FF/FFFFFF?text=Dosen",
+  name: "Mutiara Rizqi Nur Rachmi, S.Ak., M.Ak",
+    title: "",
+    description: "Dosen Matakuliah Pendidikan Agama.",
+    role: "Pengampu",
+    // PASTIKAN BARIS INI BENAR:
+    imagePlaceholder: "novi.jpeg",
 };
 
 export const members = [
@@ -28,7 +30,7 @@ export const members = [
     kelas: "SI303",
     domisili: "JAKARTA",
     agama: "Islam",
-    wa: "081 252 262 124",
+    wa: "0812 5226 2124",
     imagePlaceholder:"lkm.jpeg",
   },
   {
@@ -50,7 +52,7 @@ export const members = [
     kelas: "SI303",
     domisili: "BOGOR",
     agama: "Islam",
-    wa: "085 163 713 912",
+    wa: "0851 6371 3912",
     imagePlaceholder:"ard.jpg",
 
   },
@@ -62,7 +64,7 @@ export const members = [
     kelas: "SI303",
     domisili: "Jepang",
     agama: "Islam",
-    wa: "+818073584101",
+    wa: "0807 3584 101",
     imagePlaceholder:"jihan.jpeg",
   },
   {
@@ -73,7 +75,7 @@ export const members = [
     kelas: "SI303",
     domisili: "Bandung",
     agama: "Islam",
-    wa: "+62895361194471",
+    wa: "0895361194471",
     imagePlaceholder:"nirmala.jpg",
   },
   {
