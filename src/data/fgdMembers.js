@@ -169,5 +169,15 @@ export const members = [
     wa: "0813 3769 4488",
     imagePlaceholder:"muni.jpg",
   },
- 
+   {
+    id: 15,
+    name: "LUKI ISTAKIM",
+    role: "",
+    nim: "220101010173",
+    kelas: "SI303",
+    domisili: "Jakarta selatan",
+    agama: "Islam",
+    wa: "0857 7279 0024",
+    imagePlaceholder:"luki.jpeg",
+  },
 ];

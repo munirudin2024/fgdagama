@@ -233,6 +233,7 @@ const FGDPage = () => {
                     }}
                 >
                     {/* Tautan Unduh Artikel */}
+                    {/*
                     <div style={{ margin: "40px 0 30px 0" }}>
                         <p style={{ margin: "25px 0 10px 0", fontSize: "1em", fontWeight: "bold", color: "white" }}>
                         </p>
@@ -257,7 +258,7 @@ const FGDPage = () => {
                         >
                             download artikel
                         </a>
-                    </div> 
+                    </div> */}
                 </div> 
             </section>
 
