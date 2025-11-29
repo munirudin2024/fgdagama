@@ -57,10 +57,12 @@ const Calendar = ({ meetingDate, meetingMonth, meetingYear, zoomLink }) => {
         </div>
         
         <div style={styles.meetingInfo}>
+        {/*
           <h3>Waktu Pertemuan</h3>
           <p>
             Tanggal : {meetingDate} {MONTH_NAMES[meetingMonthIndex]} {meetingYear}
           </p>
+          {/*
           <a
             href={zoomLink || "#"}
             target="_blank"
@@ -68,10 +70,11 @@ const Calendar = ({ meetingDate, meetingMonth, meetingYear, zoomLink }) => {
             style={styles.zoomButton}
           >
             {zoomLink ? "Gabung ke Zoom Meeting" : " join zoom sekarang "}
-          </a>
+          </a> 
           <p style={{ marginTop: '10px', fontSize: '0.85em', color: '#ccc' }}>
             {zoomLink ? 'Klik untuk bergabung tepat waktu.' : ''}
-          </p>
+          </p> */}
+          
         </div>
       </div>
 
