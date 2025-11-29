@@ -91,7 +91,7 @@ const LiveChatPopup = () => {
             sessionStorage.setItem('chatUser', JSON.stringify(userData));
             setIsLoggedIn(true);
         } else {
-            setLoginError('Nama atau Nomor WA tidak ditemukan di data anggota.');
+            setLoginError('Nomor WA tidak ditemukan di data anggota.');
         }
     };
 
@@ -132,7 +132,7 @@ const LiveChatPopup = () => {
                 </div>
                 <div style={styles.loginBody}>
                     <p style={{marginBottom: '10px'}}>
-                        Masukkan Nomor WA
+                        Masukkan Wa atau fullname
                     </p>
                     <form onSubmit={handleLogin} style={styles.loginForm}>
                         <input
