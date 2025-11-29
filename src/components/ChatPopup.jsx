@@ -139,7 +139,7 @@ const LiveChatPopup = () => {
                             type="text"
                             value={loginInput}
                             onChange={(e) => setLoginInput(e.target.value)}
-                            placeholder="Nama Lengkap atau WA (08xxxx)"
+                            placeholder="08xxxx"
                             style={styles.inputField}
                         />
                         {loginError && <p style={styles.loginError}>{loginError}</p>}
