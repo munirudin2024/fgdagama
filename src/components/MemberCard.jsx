@@ -206,7 +206,7 @@ const MemberCard = ({ member }) => {
           </div>
           
           {/* Item 4: WA Link */}
-          {/*
+          
           <div style={detailItemStyle}>
             <span style={labelStyle}>WhatsApp</span>
             <span style={valueStyle}>
@@ -219,7 +219,7 @@ const MemberCard = ({ member }) => {
                 {member.wa}
               </a>
             </span>
-          </div> */}
+          </div> 
         </div> 
 
         {/* 4. Info Gabungan (Role dan Klik Detail) - Selalu tampil di bawah */}

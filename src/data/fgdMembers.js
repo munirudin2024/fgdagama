@@ -98,7 +98,7 @@ export const members = [
     kelas: "SI303",
     domisili: "Jakarta",
     agama: "Islam",
-    wa: "0821 1261 9129",
+    wa: "082112619129",
     imagePlaceholder:"mau.jpeg",
 
   },
@@ -110,7 +110,7 @@ export const members = [
     kelas: "SI303",
     domisili: "Parung Panjang",
     agama: "Islam",
-    wa: "0822 6939 4785",
+    wa: "082269394785",
     imagePlaceholder:"dafa.jpeg",
   },
   {
@@ -121,7 +121,7 @@ export const members = [
     kelas: "SI303",
     domisili: "Bekasi",
     agama: "Islam",
-    wa: "0838 7408 3841",
+    wa: "083874083841",
     imagePlaceholder: "habib.jpg",
   },
   {
@@ -132,7 +132,7 @@ export const members = [
     kelas: "SI303",
     domisili: "Tarakan",
     agama: "Islam",
-    wa: "0821 4961 8718",
+    wa: "082149618718",
     imagePlaceholder:"hilmi.png",
   },
   {
@@ -155,7 +155,7 @@ export const members = [
     kelas: "",
     domisili: "",
     agama: "",
-    wa: "",
+    wa: "087714492095",
     imagePlaceholder:"black.png",
   },
   {
@@ -166,7 +166,7 @@ export const members = [
     kelas: "SI303",
     domisili: "Demak",
     agama: "Islam",
-    wa: "0813 3769 4488",
+    wa: "081337694488",
     imagePlaceholder:"muni.jpg",
   },
    {
@@ -177,7 +177,7 @@ export const members = [
     kelas: "SI303",
     domisili: "Jakarta selatan",
     agama: "Islam",
-    wa: "0857 7279 0024",
+    wa: "085772790024",
     imagePlaceholder:"luki.jpeg",
   },
 ];
