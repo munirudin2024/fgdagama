@@ -155,7 +155,7 @@ const MemberCard = ({ member }) => {
         {!showDetails && (
           <div style={initialTextStyle}>
             <p style={nameInitialStyle}>{member.name}</p>
-            <p style={nimInitialStyle}>{member.nim}</p>
+            {/*<p style={nimInitialStyle}>{member.nim}</p>*/}
           </div>
         )}
       </div>
@@ -179,7 +179,7 @@ const MemberCard = ({ member }) => {
             <p
               style={{ color: "#555", fontSize: "0.9em", margin: "0 0 10px 0" }}
             >
-              {member.nim}
+              {/*{member.nim}*/}
             </p>
           </>
         )}
